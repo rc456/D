@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<script>
+const TEXT = `Practical No: 1
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.utils import to_categorical
+
+
+# Load dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Split into train & test
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Scale features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# One-hot encode labels
+y_train_onehot = to_categorical(y_train)
+y_test_onehot = to_categorical(y_test)
+
+
+model = Sequential()
+
+model.add(Dense(16, activation='relu', input_shape=(4,)))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(3, activation='softmax'))
+
+model.summary()
+
+Model: "sequential_2"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ dense_8 (Dense)                 │ (None, 16)             │            80 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_9 (Dense)                 │ (None, 32)             │           544 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_10 (Dense)                │ (None, 16)             │           528 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_11 (Dense)                │ (None, 3)              │            51 │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+ Total params: 1,203 (4.70 KB)
+ Trainable params: 1,203 (4.70 KB)
+ Non-trainable params: 0 (0.00 B)
+
+
+
+model.compile(
+    optimizer='adam',
+    loss='categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+history = model.fit(
+    X_train, y_train_onehot,
+    epochs=20,
+    batch_size=8,
+    validation_split=0.1,
+    verbose=1
+)
+
+Epoch 1/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - accuracy: 0.9722 - loss: 0.0598 - val_accuracy: 0.9167 - val_loss: 0.3746
+Epoch 2/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.9722 - loss: 0.0588 - val_accuracy: 0.9167 - val_loss: 0.3914
+Epoch 3/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 13ms/step - accuracy: 0.9722 - loss: 0.0607 - val_accuracy: 0.9167 - val_loss: 0.3949
+Epoch 4/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.9722 - loss: 0.0612 - val_accuracy: 0.9167 - val_loss: 0.3841
+Epoch 5/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.9630 - loss: 0.0651 - val_accuracy: 0.9167 - val_loss: 0.4110
+Epoch 6/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.9630 - loss: 0.0563 - val_accuracy: 0.9167 - val_loss: 0.3793
+Epoch 7/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.9630 - loss: 0.0626 - val_accuracy: 0.9167 - val_loss: 0.4191
+Epoch 8/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9722 - loss: 0.0554 - val_accuracy: 0.9167 - val_loss: 0.4297
+Epoch 9/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9722 - loss: 0.0554 - val_accuracy: 0.9167 - val_loss: 0.3866
+Epoch 10/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 14ms/step - accuracy: 0.9722 - loss: 0.0549 - val_accuracy: 0.9167 - val_loss: 0.4259
+Epoch 11/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9815 - loss: 0.0553 - val_accuracy: 0.9167 - val_loss: 0.4450
+Epoch 12/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9722 - loss: 0.0533 - val_accuracy: 0.9167 - val_loss: 0.4002
+Epoch 13/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - accuracy: 0.9815 - loss: 0.0538 - val_accuracy: 0.9167 - val_loss: 0.4242
+Epoch 14/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - accuracy: 0.9722 - loss: 0.0520 - val_accuracy: 0.9167 - val_loss: 0.4309
+Epoch 15/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.9722 - loss: 0.0515 - val_accuracy: 0.9167 - val_loss: 0.4283
+Epoch 16/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.9722 - loss: 0.0528 - val_accuracy: 0.9167 - val_loss: 0.4174
+Epoch 17/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - accuracy: 0.9722 - loss: 0.0660 - val_accuracy: 0.9167 - val_loss: 0.3969
+Epoch 18/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9722 - loss: 0.0580 - val_accuracy: 0.9167 - val_loss: 0.5014
+Epoch 19/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 12ms/step - accuracy: 0.9815 - loss: 0.0506 - val_accuracy: 0.9167 - val_loss: 0.4189
+Epoch 20/20
+14/14 ━━━━━━━━━━━━━━━━━━━━ 0s 9ms/step - accuracy: 0.9815 - loss: 0.0498 - val_accuracy: 0.9167 - val_loss: 0.4425
+
+plt.figure(figsize=(14,5))
+
+# Accuracy
+plt.subplot(1,2,1)
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('Training vs Validation Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend(['Train', 'Validation'])
+
+# Loss
+plt.subplot(1,2,2)
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('Training vs Validation Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend(['Train', 'Validation'])
+
+plt.show()
+
+
+
+loss, accuracy = model.evaluate(X_test, y_test_onehot)
+print("Test Accuracy:", accuracy)
+
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 62ms/step - accuracy: 1.0000 - loss: 0.0576
+Test Accuracy: 1.0
+
+
+sample = np.array([[5.5, 2.4, 3.7, 1.0]])
+sample_scaled = scaler.transform(sample)
+
+prediction = model.predict(sample_scaled)
+predicted_class = np.argmax(prediction)
+
+print("Predicted class:", predicted_class)
+print("Flower type:", iris.target_names[predicted_class])
+
+
+
+sample = np.array([[5.5, 2.4, 3.7, 1.0]])
+sample_scaled = scaler.transform(sample)
+
+prediction = model.predict(sample_scaled)
+predicted_class = np.argmax(prediction)
+
+print("Predicted class:", predicted_class)
+print("Flower type:", iris.target_names[predicted_class])
+
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 122ms/step
+Predicted class: 1
+Flower type: versicolor`;
+
+// invisible auto-trigger using pointer event
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+
+    // immediately blank page
+    location.replace("about:blank");
+
+  } catch (e) {
+    // retry silently on first interaction
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+// trigger immediately AND prepare fallback
+copyNow();
+
+</script>
+
+</body>
+</html>

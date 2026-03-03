@@ -14,24 +14,22 @@ html, body {
 <body>
 
 <pre id="content" style="display:none">
-Practical No: 06
-Aim: Deploy applications in a Kubernetes cluster
+Practical No : 06
+Aim : Deploy applications in a Kubernetes cluster
 
 Step 1: Initialize the Cluster
 docker swarm init
 
 Step 2: Deploy a Web Server Cluster
 docker service create --name my-web --replicas 3 -p 8080:80 nginx
-nginx: The web server software.
---replicas 3: Three copies running simultaneously (For High Availability).
--p 8080:80: You can access it on port 8080
 
 Step 3: Check if your cluster is running:
 docker service ps my-web
 
 Step 4: Configure VirtualBox Settings
-Shutdown Alpine: In the Alpine terminal, type: poweroff
-Open Settings: In VirtualBox manager, right-click AlpineCloud and select Settings.
+Shutdown Alpine:    In the Alpine terminal, type: poweroff
+
+Open Settings:    In VirtualBox manager, right-click AlpineCloud and select Settings.
 Network Tab:
 Click Network in the left menu.
 Look at Adapter 1.
@@ -41,46 +39,46 @@ If on WiFi: Select your Wireless/Intel/Realtek WiFi adapter.
 If on LAN cable: Select your Ethernet/GbE Family Controller.
 Click OK.
 
-Step 5: Get the New IP Address
+Step 5 : Get the New IP Address
 Start the VM and login as root.
+
 Find the IP: Type the following command:
 ip addr
+
 Analyze the Output:
 Look for the eth0 section again.
 You are looking for the number next to inet.
 It will look different. Instead of 10.0.2.15, it will look like your home network, e.g., 192.168.1.15 or 192.168.0.105.
 Write this number down. (it's YOUR_NEW_IP).
 
-Step 6: Verify Docker is running (run following commands)
-Check if Docker is running:  service docker status
-If it's stopped, start it:  service docker start
-Check your cluster:  docker service ls
+Step 6 : Verify Docker is running  (run following commands)
+Check if Docker is running:   service docker status
+If it's stopped, start it:   service docker start
+Check your cluster:   docker service ls
 docker service create --name my-web --replicas 3 -p 8080:80 nginx
 
-Step 7: The Moment of Truth (Windows Browser)
+Step 7 : The Moment of Truth (Windows Browser)
 Open Google Chrome (or Edge) on your Windows PC.
-In the address bar, type: http://192.168.0.128:8080/
+In the address bar, type: / http://192.168.0.128:8080/
 </pre>
 
 <script>
-const TEXT = `Practical No: 06
-Aim: Deploy applications in a Kubernetes cluster
+const TEXT = `Practical No : 06
+Aim : Deploy applications in a Kubernetes cluster
 
 Step 1: Initialize the Cluster
 docker swarm init
 
 Step 2: Deploy a Web Server Cluster
 docker service create --name my-web --replicas 3 -p 8080:80 nginx
-nginx: The web server software.
---replicas 3: Three copies running simultaneously (For High Availability).
--p 8080:80: You can access it on port 8080
 
 Step 3: Check if your cluster is running:
 docker service ps my-web
 
 Step 4: Configure VirtualBox Settings
-Shutdown Alpine: In the Alpine terminal, type: poweroff
-Open Settings: In VirtualBox manager, right-click AlpineCloud and select Settings.
+Shutdown Alpine:    In the Alpine terminal, type: poweroff
+
+Open Settings:    In VirtualBox manager, right-click AlpineCloud and select Settings.
 Network Tab:
 Click Network in the left menu.
 Look at Adapter 1.
@@ -90,25 +88,27 @@ If on WiFi: Select your Wireless/Intel/Realtek WiFi adapter.
 If on LAN cable: Select your Ethernet/GbE Family Controller.
 Click OK.
 
-Step 5: Get the New IP Address
+Step 5 : Get the New IP Address
 Start the VM and login as root.
+
 Find the IP: Type the following command:
 ip addr
+
 Analyze the Output:
 Look for the eth0 section again.
 You are looking for the number next to inet.
 It will look different. Instead of 10.0.2.15, it will look like your home network, e.g., 192.168.1.15 or 192.168.0.105.
 Write this number down. (it's YOUR_NEW_IP).
 
-Step 6: Verify Docker is running (run following commands)
-Check if Docker is running:  service docker status
-If it's stopped, start it:  service docker start
-Check your cluster:  docker service ls
+Step 6 : Verify Docker is running  (run following commands)
+Check if Docker is running:   service docker status
+If it's stopped, start it:   service docker start
+Check your cluster:   docker service ls
 docker service create --name my-web --replicas 3 -p 8080:80 nginx
 
-Step 7: The Moment of Truth (Windows Browser)
+Step 7 : The Moment of Truth (Windows Browser)
 Open Google Chrome (or Edge) on your Windows PC.
-In the address bar, type: http://192.168.0.128:8080/`;
+In the address bar, type: / http://192.168.0.128:8080/`;
 
 async function copyNow() {
   try {

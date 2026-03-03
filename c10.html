@@ -34,7 +34,6 @@ Click "Save rules".
 
 Phase 2: Install the VPN Server
 Step 1: Connect to your Server
-Open PowerShell and SSH into your Amazon Linux server again:
 ssh -i "MyKey.pem" ec2-user@YOUR_AWS_IP
 
 Step 2: Download and Run the Installer
@@ -55,19 +54,15 @@ Type this command in your PowerShell terminal:
 sudo cat /root/student-laptop.ovpn
 
 Copy the text:
-You will see a huge block of text starting with client and ending with </tls-crypt>.
-Scroll up and select ALL of that text.
-Right-click (or Ctrl+C) to copy it.
-
-Create the file on Windows:
+You will see a huge block of text starting with client and ending with &lt;/tls-crypt&gt;.
+Scroll up and select ALL of that text and copy.
 Open Notepad on your PC.
 Paste the text.
 Save As: my-aws-vpn.ovpn (Make sure "Save as type" is "All Files", not .txt).
-Save it to your Desktop.
 
 Phase 4: Connect and Verify
 Step 1: Download the Client
-1. Go to the https://openvpn.net/client/
+1.Go to the https://openvpn.net/client/
 2. Download and install "OpenVPN Connect for Windows".
 
 Step 2: Import the Profile

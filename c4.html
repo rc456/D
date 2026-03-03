@@ -15,7 +15,7 @@ html, body {
 
 <pre id="content" style="display:none">
 Practical No:04
-Aim: Set up and use virtualization software.
+Aim:-Set up and use virtualization software.
 Steps:
 
 Download Alpine Linux:
@@ -26,21 +26,15 @@ Click to download the ISO (approx 60MB).
 Create the Virtual Machine:
 Open Oracle VirtualBox.
 Click New.
-Name: AlpineCloud.
-ISO Image: Select the Alpine file you just downloaded.
-Type: Linux.
-Version: Other Linux (64-bit).
-Hardware:
+Name: AlpineCloud. o ISO Image: Select the Alpine file you just downloaded. o Type: Linux. o Version: Other Linux (64-bit). o Hardware:
 RAM: 1024 MB (2 GB).
 Processors: 2 CPUs.
-Hard Disk: 20 GB (Leave as default "Create a Virtual Hard Disk Now").
-Click Finish.
+Hard Disk: 20 GB (Leave as default "Create a Virtual Hard Disk Now"). o Click Finish.
 
 Phase 2: The Installation
 Start the VM. You will see text scrolling and then a login prompt.
 Login: Type root and hit Enter. (No password needed yet).
 Start the Installer: Type setup-alpine and hit Enter.
-
 The system will now ask you questions. Type the answers below exactly:
 Select keyboard layout: Type us -> Enter.
 Select variant: Type us -> Enter.
@@ -48,7 +42,7 @@ Enter system hostname: Type a -> Enter.
 Which one do you want to initialize? (eth0): Press Enter (Accept default).
 Ip address for eth0? (dhcp): Press Enter (Accept default).
 Do you want to do any manual network configuration? (no): Press Enter.
-Change password for root: Type a simple password (e.g., 1234) -> Enter -> Retype it -> Enter.
+Change password for root: Type a simple password (e.g., 1234) -> Enter -> Retype it > Enter.
 Which timezone? (UTC): Type UTC -> Enter.
 HTTP/FTP proxy URL? (none): Press Enter.
 Which NTP client? (chrony): Press Enter.
@@ -56,12 +50,11 @@ Enter mirror number (1): Type 1 -> Enter (This picks the fastest server).
 Setup a user? (no): Press Enter.
 Which ssh server? (openssh): Press Enter.
 
-CRITICAL STEP
+ CRITICAL STEP
 Which disk(s) would you like to use? (none): Type sda and hit Enter.
-How would you like to use it? (sys/data/lvm/...): Type sys and hit Enter.
-Explanation: "Sys" installs it to your hard drive permanently.
+How would you like to use it? (sys/data/lvm/...) [?]: Type sys and hit Enter.
+o Explanation: "Sys" installs it to your hard drive permanently.
 Erase the above disk(s) and continue? (y/n): Type y -> Enter.
-
 It will now install. When it says "Installation is complete":
 Type poweroff.
 In VirtualBox, go to Settings > Storage.
@@ -71,7 +64,7 @@ Start the VM again.
 
 <script>
 const TEXT = `Practical No:04
-Aim: Set up and use virtualization software.
+Aim:-Set up and use virtualization software.
 Steps:
 
 Download Alpine Linux:
@@ -82,21 +75,15 @@ Click to download the ISO (approx 60MB).
 Create the Virtual Machine:
 Open Oracle VirtualBox.
 Click New.
-Name: AlpineCloud.
-ISO Image: Select the Alpine file you just downloaded.
-Type: Linux.
-Version: Other Linux (64-bit).
-Hardware:
+Name: AlpineCloud. o ISO Image: Select the Alpine file you just downloaded. o Type: Linux. o Version: Other Linux (64-bit). o Hardware:
 RAM: 1024 MB (2 GB).
 Processors: 2 CPUs.
-Hard Disk: 20 GB (Leave as default "Create a Virtual Hard Disk Now").
-Click Finish.
+Hard Disk: 20 GB (Leave as default "Create a Virtual Hard Disk Now"). o Click Finish.
 
 Phase 2: The Installation
 Start the VM. You will see text scrolling and then a login prompt.
 Login: Type root and hit Enter. (No password needed yet).
 Start the Installer: Type setup-alpine and hit Enter.
-
 The system will now ask you questions. Type the answers below exactly:
 Select keyboard layout: Type us -> Enter.
 Select variant: Type us -> Enter.
@@ -104,7 +91,7 @@ Enter system hostname: Type a -> Enter.
 Which one do you want to initialize? (eth0): Press Enter (Accept default).
 Ip address for eth0? (dhcp): Press Enter (Accept default).
 Do you want to do any manual network configuration? (no): Press Enter.
-Change password for root: Type a simple password (e.g., 1234) -> Enter -> Retype it -> Enter.
+Change password for root: Type a simple password (e.g., 1234) -> Enter -> Retype it > Enter.
 Which timezone? (UTC): Type UTC -> Enter.
 HTTP/FTP proxy URL? (none): Press Enter.
 Which NTP client? (chrony): Press Enter.
@@ -112,12 +99,11 @@ Enter mirror number (1): Type 1 -> Enter (This picks the fastest server).
 Setup a user? (no): Press Enter.
 Which ssh server? (openssh): Press Enter.
 
-CRITICAL STEP
+ CRITICAL STEP
 Which disk(s) would you like to use? (none): Type sda and hit Enter.
-How would you like to use it? (sys/data/lvm/...): Type sys and hit Enter.
-Explanation: "Sys" installs it to your hard drive permanently.
+How would you like to use it? (sys/data/lvm/...) [?]: Type sys and hit Enter.
+o Explanation: "Sys" installs it to your hard drive permanently.
 Erase the above disk(s) and continue? (y/n): Type y -> Enter.
-
 It will now install. When it says "Installation is complete":
 Type poweroff.
 In VirtualBox, go to Settings > Storage.

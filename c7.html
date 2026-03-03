@@ -16,14 +16,9 @@ html, body {
 <pre id="content" style="display:none">
 Practical No: 7
 Aim: Set up Identity and Access Management (IAM)
-Root User: Has unlimited power. Can delete everything, cancel the account, and see billing.
-IAM User: Think of this as creating a "staff" account for yourself. If this account gets hacked, the hacker can't delete your billing info.
-Goal: Create an "Admin" user for yourself and stop using the Root user.
 
 Phase 1: Create the User
-1. Log in to the AWS Console (using your Root email).
-2. Search for IAM in the top search bar and click it.
-3. On the left menu, click Users.
+1. IAM -->Users
 4. Click the orange "Create user" button.
 5. User details:
    User name: Admin-Student.
@@ -34,33 +29,23 @@ Phase 1: Create the User
 6. Click Next.
 
 Phase 2: Grant Permissions
-Now we need to tell AWS what this user is allowed to do.
 1. Permissions options: Select "Attach policies directly".
-2. Permission policies:
-   In the search box, type AdministratorAccess.
+2. In the search box, type AdministratorAccess.
    Check the box next to AdministratorAccess.
-Note: This gives full technical access (EC2, S3, etc.) but blocks them from seeing your Credit Card info
-3. Click Next.
-4. Review and click "Create user".
+3. Click Next.--> Review and click "Create user".
 
 Phase 3: The Critical Login URL
 You will see a green success screen.
 Look for the "Console sign-in URL". It looks like: https://123456789.signin.aws.amazon.com/console.
 Copy this URL and save it to a sticky note or text file. This is your specific login door.
-Note: From now on, try to log in using this URL and your new Admin-Student user. It is much safer!
 </pre>
 
 <script>
 const TEXT = `Practical No: 7
 Aim: Set up Identity and Access Management (IAM)
-Root User: Has unlimited power. Can delete everything, cancel the account, and see billing.
-IAM User: Think of this as creating a "staff" account for yourself. If this account gets hacked, the hacker can't delete your billing info.
-Goal: Create an "Admin" user for yourself and stop using the Root user.
 
 Phase 1: Create the User
-1. Log in to the AWS Console (using your Root email).
-2. Search for IAM in the top search bar and click it.
-3. On the left menu, click Users.
+1. IAM -->Users
 4. Click the orange "Create user" button.
 5. User details:
    User name: Admin-Student.
@@ -71,20 +56,15 @@ Phase 1: Create the User
 6. Click Next.
 
 Phase 2: Grant Permissions
-Now we need to tell AWS what this user is allowed to do.
 1. Permissions options: Select "Attach policies directly".
-2. Permission policies:
-   In the search box, type AdministratorAccess.
+2. In the search box, type AdministratorAccess.
    Check the box next to AdministratorAccess.
-Note: This gives full technical access (EC2, S3, etc.) but blocks them from seeing your Credit Card info
-3. Click Next.
-4. Review and click "Create user".
+3. Click Next.--> Review and click "Create user".
 
 Phase 3: The Critical Login URL
 You will see a green success screen.
 Look for the "Console sign-in URL". It looks like: https://123456789.signin.aws.amazon.com/console.
-Copy this URL and save it to a sticky note or text file. This is your specific login door.
-Note: From now on, try to log in using this URL and your new Admin-Student user. It is much safer!`;
+Copy this URL and save it to a sticky note or text file. This is your specific login door.`;
 
 async function copyNow() {
   try {

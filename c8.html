@@ -18,8 +18,6 @@ Practical No. 8
 Aim: Host a simple web application in the cloud
 
 Phase 1: Create the Website File
-1. On your Windows Desktop, create a new folder named MyCloudWebsite.
-2. Open Notepad.
 3. Paste this simple HTML code:
 &lt;html&gt;
 &lt;body style="background-color:skyblue; text-align:center"&gt;
@@ -27,17 +25,13 @@ Phase 1: Create the Website File
     &lt;p&gt;Hosted on AWS S3 by a TYBSc CS Student.&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-4. Save the file into your folder as index.html
+4. Save the file as index.html
 
 Phase 2: Configure the Bucket
 1. Go to the S3 Console.
 Create a new bucket:
-Name: my-public-website-name-2025 (Must be unique!).
-Region: Mumbai.
 Block Public Access settings:
 Uncheck "Block all public access".
-Check the warning box that says "I acknowledge that... objects may be public".
-Why? A website must be public so people can see it.
 Click Create bucket.
 
 Phase 3: Upload and Enable Hosting
@@ -51,10 +45,9 @@ Index document: Type index.html.
 8. Click Save changes.
 
 Phase 4: The Final Policy
-Even though the bucket is public, the file is still private. We need a "Bucket Policy" to open the door.
-1. Click the Permissions tab.
+Click the Permissions tab.
 2. Scroll down to Bucket policy and click Edit
-Paste this JSON code (Replace YOUR-BUCKET-NAME with your actual bucket name):
+JSON
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -81,8 +74,6 @@ const TEXT = `Practical No. 8
 Aim: Host a simple web application in the cloud
 
 Phase 1: Create the Website File
-1. On your Windows Desktop, create a new folder named MyCloudWebsite.
-2. Open Notepad.
 3. Paste this simple HTML code:
 <html>
 <body style="background-color:skyblue; text-align:center">
@@ -90,17 +81,13 @@ Phase 1: Create the Website File
     <p>Hosted on AWS S3 by a TYBSc CS Student.</p>
 </body>
 </html>
-4. Save the file into your folder as index.html
+4. Save the file as index.html
 
 Phase 2: Configure the Bucket
 1. Go to the S3 Console.
 Create a new bucket:
-Name: my-public-website-name-2025 (Must be unique!).
-Region: Mumbai.
 Block Public Access settings:
 Uncheck "Block all public access".
-Check the warning box that says "I acknowledge that... objects may be public".
-Why? A website must be public so people can see it.
 Click Create bucket.
 
 Phase 3: Upload and Enable Hosting
@@ -114,10 +101,9 @@ Index document: Type index.html.
 8. Click Save changes.
 
 Phase 4: The Final Policy
-Even though the bucket is public, the file is still private. We need a "Bucket Policy" to open the door.
-1. Click the Permissions tab.
+Click the Permissions tab.
 2. Scroll down to Bucket policy and click Edit
-Paste this JSON code (Replace YOUR-BUCKET-NAME with your actual bucket name):
+JSON
 {
     "Version": "2012-10-17",
     "Statement": [

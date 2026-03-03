@@ -18,7 +18,7 @@ Practical No: 09
 Aim: Implement access controls and encryption for cloud storage
 
 Phase 1: Create the "Vault" Bucket
-Go to the S3 Console -> Click Create bucket.
+Go to the S3 Console 🡪Click Create bucket.
 Bucket Name: my-server-bucket-vault
 Check "Block all public access". (This must be ON).
 Encryption type: Select Server-side encryption with Amazon S3 managed keys (SSE-S3).
@@ -28,8 +28,9 @@ Click Create bucket.
 Phase 2: Verify Encryption
 Create a text file named secret-codes.txt on your PC.
 Upload it to your new my-server-bucket-vault bucket.
-Once uploaded, click the file name -> Server-side encryption settings
+Once uploaded, click the file name 🡪Server-side encryption settings
 Look for the Checkmark: You should see "SSE-S3" listed means, Your file is now encrypted.
+Output:
 
 Phase 3: Implement Access Controls (The IP Lock)
 Step 1: Get your Public IP
@@ -37,8 +38,8 @@ Open a new browser tab and search Google for: "what is my ip".
 Copy the IP address shown (e.g., 103.45.xx.xx).
 
 Step 2: Create the Policy
-Go to your bucket's Permissions -> Bucket policy -> click Edit.
-Paste the following JSON code -> Click Save changes.
+Go to your bucket's Permissions 🡪Bucket policy 🡪click Edit.
+Paste the following JSON code 🡪Click Save changes.
 {
     "Version": "2012-10-17",
     "Id": "S3PolicyId1",
@@ -78,7 +79,7 @@ const TEXT = `Practical No: 09
 Aim: Implement access controls and encryption for cloud storage
 
 Phase 1: Create the "Vault" Bucket
-Go to the S3 Console -> Click Create bucket.
+Go to the S3 Console 🡪Click Create bucket.
 Bucket Name: my-server-bucket-vault
 Check "Block all public access". (This must be ON).
 Encryption type: Select Server-side encryption with Amazon S3 managed keys (SSE-S3).
@@ -88,8 +89,9 @@ Click Create bucket.
 Phase 2: Verify Encryption
 Create a text file named secret-codes.txt on your PC.
 Upload it to your new my-server-bucket-vault bucket.
-Once uploaded, click the file name -> Server-side encryption settings
+Once uploaded, click the file name 🡪Server-side encryption settings
 Look for the Checkmark: You should see "SSE-S3" listed means, Your file is now encrypted.
+Output:
 
 Phase 3: Implement Access Controls (The IP Lock)
 Step 1: Get your Public IP
@@ -97,8 +99,8 @@ Open a new browser tab and search Google for: "what is my ip".
 Copy the IP address shown (e.g., 103.45.xx.xx).
 
 Step 2: Create the Policy
-Go to your bucket's Permissions -> Bucket policy -> click Edit.
-Paste the following JSON code -> Click Save changes.
+Go to your bucket's Permissions 🡪Bucket policy 🡪click Edit.
+Paste the following JSON code 🡪Click Save changes.
 {
     "Version": "2012-10-17",
     "Id": "S3PolicyId1",

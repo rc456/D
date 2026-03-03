@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No: 02
+Aim: Launch and configure a virtual machine instance.
+Steps:
+Step1: Open the AWS Console.
+Step2: Click the Region dropdown and select Mumbai (ap-south-1).
+Step3: Click the Search bar, type EC2, and click EC2 Virtual Servers in the Cloud
+Step4: Click the orange Launch instance button.
+Step5: Type MyFirstServer for the name.
+Step6: Verify Amazon Linux 2023 AMI is selected.
+Step7: Verify t2.micro or t3.micro is selected (Free tier eligible).
+Step8: Scroll to Key pair, click Create new key pair.
+Step9: Type MyKey for the key name.
+Step10: Click Create key pair and save the MyKey.pem file.
+Step11: Scroll to Network settings, and ensure Allow SSH traffic from Anywhere (0.0.0.0/0) is checked.
+Step12: Click the orange Launch instance button.
+Step13: Click the Instance ID in the launch success banner.
+Step14: Find and Copy the Public IPv4 address.
+Step15: Open PowerShell Run as administrator
+Steps16: Type cd Documents\CloudKeys (or your folder path) and hit Enter.
+Step17: Type the full ssh -i "MyKey.pem" ec2-user@YOUR_IP_ADDRESS command, replacing the IP, and hit Enter.
+Step18: When prompted for the fingerprint, type yes and hit Enter.
+Steps19: Once the prompt changes, type sudo dnf update -y and hit Enter.
+
+
+
+Practical No. 03
+Aim: Create and Manage Cloud Storage
+
+Step 1: Create a Bucket
+Bucket Name:
+Object Ownership: Leave as "ACLs disabled" (Recommended).
+Block Public Access settings for this bucket:
+Keep this CHECKED.
+"Create bucket".
+
+Step 2: Uploading an Object (Files)
+Create a test file
+Go to your Bucket: Click on the name of the bucket you just created.
+Click the orange "Upload" button.
+Click "Add files" and select your File.
+Expand "Properties", Leave it on Standard.
+Click "Upload" at the bottom.
+You should see a green banner: "Upload succeeded".
+
+Phase 3: Organization (Folders)
+S3 is technically a "flat" structure (it doesn't have real folders like Windows), but the console mimics them to help us organize.
+Click "Create folder".
+Name it logs.
+Click "Create folder".
+
+
+
+Practical No:04
+Aim:-Set up and use virtualization software.
+Steps:
+
+Download Alpine Linux:
+Go to the Alpine Linux Downloads page.
+Look for the "Virtual" section (optimized for VirtualBox) under x86_64.
+Click to download the ISO (approx 60MB).
+
+Create the Virtual Machine:
+Open Oracle VirtualBox.
+Click New.
+Name: AlpineCloud. o ISO Image: Select the Alpine file you just downloaded. o Type: Linux. o Version: Other Linux (64-bit). o Hardware:
+RAM: 1024 MB (2 GB).
+Processors: 2 CPUs.
+Hard Disk: 20 GB (Leave as default "Create a Virtual Hard Disk Now"). o Click Finish.
+
+Phase 2: The Installation
+Start the VM. You will see text scrolling and then a login prompt.
+Login: Type root and hit Enter. (No password needed yet).
+Start the Installer: Type setup-alpine and hit Enter.
+The system will now ask you questions. Type the answers below exactly:
+Select keyboard layout: Type us -> Enter.
+Select variant: Type us -> Enter.
+Enter system hostname: Type a -> Enter.
+Which one do you want to initialize? (eth0): Press Enter (Accept default).
+Ip address for eth0? (dhcp): Press Enter (Accept default).
+Do you want to do any manual network configuration? (no): Press Enter.
+Change password for root: Type a simple password (e.g., 1234) -> Enter -> Retype it > Enter.
+Which timezone? (UTC): Type UTC -> Enter.
+HTTP/FTP proxy URL? (none): Press Enter.
+Which NTP client? (chrony): Press Enter.
+Enter mirror number (1): Type 1 -> Enter (This picks the fastest server).
+Setup a user? (no): Press Enter.
+Which ssh server? (openssh): Press Enter.
+
+ CRITICAL STEP
+Which disk(s) would you like to use? (none): Type sda and hit Enter.
+How would you like to use it? (sys/data/lvm/...) [?]: Type sys and hit Enter.
+o Explanation: "Sys" installs it to your hard drive permanently.
+Erase the above disk(s) and continue? (y/n): Type y -> Enter.
+It will now install. When it says "Installation is complete":
+Type poweroff.
+In VirtualBox, go to Settings > Storage.
+Right-click the Alpine ISO (disc icon) and select "Remove Disk from Virtual Drive". (Otherwise, it will boot into the installer again).
+Start the VM again.
+
+
+
+Practical No: 05
+Aim: Deploy applications using Docker
+
+Phase 1: Unlock the "Community" Repository
+vi /etc/apk/repositories
+(Note: vi is a text editor).
+Use the arrow keys to move the cursor down to the line that ends with .../community. It probably has a # at the start.
+Place cursor on the # and press x to delete it.
+Type :wq and hit Enter (This means "Write and Quit").
+
+Phase 2: Install Docker Type these commands:
+Update the library apk update
+Install Docker apk add docker
+Start Docker automatically on boot rc-update add docker boot
+Start Docker right now service docker start
+
+Phase 3: Verify
+Run this command to test if it works: docker run hello-world
+If you see a message saying "Hello from Docker!".
+
+
+
+Practical No : 06
+Aim : Deploy applications in a Kubernetes cluster
+
+Step 1: Initialize the Cluster
+docker swarm init
+
+Step 2: Deploy a Web Server Cluster
+docker service create --name my-web --replicas 3 -p 8080:80 nginx
+
+Step 3: Check if your cluster is running:
+docker service ps my-web
+
+Step 4: Configure VirtualBox Settings
+Shutdown Alpine:    In the Alpine terminal, type: poweroff
+
+Open Settings:    In VirtualBox manager, right-click AlpineCloud and select Settings.
+Network Tab:
+Click Network in the left menu.
+Look at Adapter 1.
+Attached to: Change from "NAT" to Bridged Adapter.
+Name: This is crucial. Select the network adapter you are currently using for internet on your Windows PC.
+If on WiFi: Select your Wireless/Intel/Realtek WiFi adapter.
+If on LAN cable: Select your Ethernet/GbE Family Controller.
+Click OK.
+
+Step 5 : Get the New IP Address
+Start the VM and login as root.
+
+Find the IP: Type the following command:
+ip addr
+
+Analyze the Output:
+Look for the eth0 section again.
+You are looking for the number next to inet.
+It will look different. Instead of 10.0.2.15, it will look like your home network, e.g., 192.168.1.15 or 192.168.0.105.
+Write this number down. (it's YOUR_NEW_IP).
+
+Step 6 : Verify Docker is running  (run following commands)
+Check if Docker is running:   service docker status
+If it's stopped, start it:   service docker start
+Check your cluster:   docker service ls
+docker service create --name my-web --replicas 3 -p 8080:80 nginx
+
+Step 7 : The Moment of Truth (Windows Browser)
+Open Google Chrome (or Edge) on your Windows PC.
+In the address bar, type: / http://192.168.0.128:8080/
+
+
+
+Practical No: 7
+Aim: Set up Identity and Access Management (IAM)
+
+Phase 1: Create the User
+1. IAM -->Users
+4. Click the orange "Create user" button.
+5. User details:
+   User name: Admin-Student.
+   Checkbox: Select "Provide user access to the AWS Management Console".
+   User type: Select "I want to create an IAM user".
+   Console password: Select "Custom password" and type a simple password you will remember.
+   Uncheck "Users must create a new password at next sign-in" (saves time).
+6. Click Next.
+
+Phase 2: Grant Permissions
+1. Permissions options: Select "Attach policies directly".
+2. In the search box, type AdministratorAccess.
+   Check the box next to AdministratorAccess.
+3. Click Next.--> Review and click "Create user".
+
+Phase 3: The Critical Login URL
+You will see a green success screen.
+Look for the "Console sign-in URL". It looks like: https://123456789.signin.aws.amazon.com/console.
+Copy this URL and save it to a sticky note or text file. This is your specific login door.
+
+
+
+Practical No. 8
+Aim: - Host a simple web application in the cloud
+Steps: -
+Phase 1: Create the Website File
+3. Paste this simple HTML code:
+&lt;html&gt;
+&lt;body style="background-color:skyblue; text-align:center"&gt;
+    &lt;h1&gt;Welcome to My Cloud Website!&lt;/h1&gt;
+    &lt;p&gt;Hosted on AWS S3 by a TYBSc CS Student.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+4. Save the file as index.html
+
+Phase 2: Configure the Bucket
+1. Go to the S3 Console.
+Create a new bucket:
+Block Public Access settings:
+Uncheck "Block all public access".
+Click Create bucket.
+
+Phase 3: Upload and Enable Hosting
+1. Click your new bucket name.
+2. Click Upload -> Add files -> Select your index1.html -> Upload.
+3. Once uploaded, click the Properties tab (top menu).
+4. Scroll to the very bottom to "Static website hosting".
+Click Edit.
+Static website hosting: Select Enable.
+Index document: Type index.html.
+8. Click Save changes.
+
+Phase 4: The Final Policy
+Click the Permissions tab.
+2. Scroll down to Bucket policy and click Edit
+JSON
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+        }
+    ]
+}
+4. Click Save changes.
+
+Phase 5: Visit Your Website
+Go back to the Properties tab.
+Scroll to the bottom "Static website hosting" section.
+You will see a link labeled "Bucket website endpoint".
+Click it.
+
+
+
+Practical No: 09
+Aim: Implement access controls and encryption for cloud storage
+
+Phase 1: Create the "Vault" Bucket
+Go to the S3 Console 🡪Click Create bucket.
+Bucket Name: my-server-bucket-vault
+Check "Block all public access". (This must be ON).
+Encryption type: Select Server-side encryption with Amazon S3 managed keys (SSE-S3).
+Bucket Key: Enable.
+Click Create bucket.
+
+Phase 2: Verify Encryption
+Create a text file named secret-codes.txt on your PC.
+Upload it to your new my-server-bucket-vault bucket.
+Once uploaded, click the file name 🡪Server-side encryption settings
+Look for the Checkmark: You should see "SSE-S3" listed means, Your file is now encrypted.
+Output:
+
+Phase 3: Implement Access Controls (The IP Lock)
+Step 1: Get your Public IP
+Open a new browser tab and search Google for: "what is my ip".
+Copy the IP address shown (e.g., 103.45.xx.xx).
+
+Step 2: Create the Policy
+Go to your bucket's Permissions 🡪Bucket policy 🡪click Edit.
+Paste the following JSON code 🡪Click Save changes.
+{
+    "Version": "2012-10-17",
+    "Id": "S3PolicyId1",
+    "Statement": [
+        {
+            "Sid": "IPAllow",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::YOUR-BUCKET-NAME",
+                "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+            ],
+            "Condition": {
+                "NotIpAddress": {
+                    "aws:SourceIp": "YOUR-IP-ADDRESS/32"
+                }
+            }
+        }
+    ]
+}
+
+Phase 4: The Hacker Test
+Test 1: Access from your PC (Authorized)
+Go to the bucket and try to Open or Download the secret-codes.txt.
+It should work perfectly because you are on the "Allowed" WiFi/Network.
+
+Test 2: Access from a "Hacker" (Unauthorized)
+Disconnect your phone from WiFi (use 4G/5G mobile data).
+On your phone, log in to the AWS Console.
+Try to view the file.
+Result: You should get an "Access Denied" or "403 Forbidden" error.
+
+
+
+Practical 10
+Aim:-Set up firewall rules and a VPN for secure access.
+Phase 1: Configure Firewall Rules (Security Groups) 
+Steps:
+Go to the EC2 Console and select your running instance.
+Click the Security tab (bottom middle).
+Click the blue link under Security groups (e.g., sg-0abc123...).
+
+Edit Inbound Rules:
+Click "Edit inbound rules".
+Rule 1 (SSH): Find the SSH rule. Change "Source" from 0.0.0.0/0 (Anywhere) to "My IP".
+Rule 2 (VPN): Click "Add rule".
+Type: Custom UDP (OpenVPN uses UDP for speed).
+Port range: 1194.
+Source: 0.0.0.0/0 (Anywhere).
+Click "Save rules".
+
+Phase 2: Install the VPN Server
+Step 1: Connect to your Server
+ssh -i "MyKey.pem" ec2-user@YOUR_AWS_IP
+
+Step 2: Download and Run the Installer
+Copy and paste this command:
+wget https://git.io/vpn -O openvpn-install.sh && sudo bash openvpn-install.sh
+
+Step 3: Answer the Wizard Questions
+Public IPv4 address: [Press Enter] (It detects your AWS IP).
+Protocol: [Press Enter] (UDP).
+Port: [Press Enter] (1194).
+DNS Server: Select Google (Type 1 or 2) or Current System Resolvers.
+Client Name: Type student-laptop.
+Press any key to continue...
+
+Phase 3: Get the "Key" to your Windows PC 🗝️
+Display the file content:
+Type this command in your PowerShell terminal:
+sudo cat /root/student-laptop.ovpn
+
+Copy the text:
+You will see a huge block of text starting with client and ending with &lt;/tls-crypt&gt;.
+Scroll up and select ALL of that text and copy.
+Open Notepad on your PC.
+Paste the text.
+Save As: my-aws-vpn.ovpn (Make sure "Save as type" is "All Files", not .txt).
+
+Phase 4: Connect and Verify
+Step 1: Download the Client
+1.Go to the https://openvpn.net/client/
+2. Download and install "OpenVPN Connect for Windows".
+
+Step 2: Import the Profile
+Open the OpenVPN Connect app.
+Click the "File" tab (or the Import icon).
+Drag and drop your my-aws-vpn.ovpn file into the window.
+Click Connect.
+
+Step 3: The Magic Verification ✨
+If the toggle turns Green, you are connected!
+</pre>
+
+<script>
+const TEXT = `Practical No: 02
+Aim: Launch and configure a virtual machine instance.
+Steps:
+Step1: Open the AWS Console.
+Step2: Click the Region dropdown and select Mumbai (ap-south-1).
+Step3: Click the Search bar, type EC2, and click EC2 Virtual Servers in the Cloud
+Step4: Click the orange Launch instance button.
+Step5: Type MyFirstServer for the name.
+Step6: Verify Amazon Linux 2023 AMI is selected.
+Step7: Verify t2.micro or t3.micro is selected (Free tier eligible).
+Step8: Scroll to Key pair, click Create new key pair.
+Step9: Type MyKey for the key name.
+Step10: Click Create key pair and save the MyKey.pem file.
+Step11: Scroll to Network settings, and ensure Allow SSH traffic from Anywhere (0.0.0.0/0) is checked.
+Step12: Click the orange Launch instance button.
+Step13: Click the Instance ID in the launch success banner.
+Step14: Find and Copy the Public IPv4 address.
+Step15: Open PowerShell Run as administrator
+Steps16: Type cd Documents\\CloudKeys (or your folder path) and hit Enter.
+Step17: Type the full ssh -i "MyKey.pem" ec2-user@YOUR_IP_ADDRESS command, replacing the IP, and hit Enter.
+Step18: When prompted for the fingerprint, type yes and hit Enter.
+Steps19: Once the prompt changes, type sudo dnf update -y and hit Enter.
+
+
+
+Practical No. 03
+Aim: Create and Manage Cloud Storage
+
+Step 1: Create a Bucket
+Bucket Name:
+Object Ownership: Leave as "ACLs disabled" (Recommended).
+Block Public Access settings for this bucket:
+Keep this CHECKED.
+"Create bucket".
+
+Step 2: Uploading an Object (Files)
+Create a test file
+Go to your Bucket: Click on the name of the bucket you just created.
+Click the orange "Upload" button.
+Click "Add files" and select your File.
+Expand "Properties", Leave it on Standard.
+Click "Upload" at the bottom.
+You should see a green banner: "Upload succeeded".
+
+Phase 3: Organization (Folders)
+S3 is technically a "flat" structure (it doesn't have real folders like Windows), but the console mimics them to help us organize.
+Click "Create folder".
+Name it logs.
+Click "Create folder".
+
+
+
+Practical No:04
+Aim:-Set up and use virtualization software.
+Steps:
+
+Download Alpine Linux:
+Go to the Alpine Linux Downloads page.
+Look for the "Virtual" section (optimized for VirtualBox) under x86_64.
+Click to download the ISO (approx 60MB).
+
+Create the Virtual Machine:
+Open Oracle VirtualBox.
+Click New.
+Name: AlpineCloud. o ISO Image: Select the Alpine file you just downloaded. o Type: Linux. o Version: Other Linux (64-bit). o Hardware:
+RAM: 1024 MB (2 GB).
+Processors: 2 CPUs.
+Hard Disk: 20 GB (Leave as default "Create a Virtual Hard Disk Now"). o Click Finish.
+
+Phase 2: The Installation
+Start the VM. You will see text scrolling and then a login prompt.
+Login: Type root and hit Enter. (No password needed yet).
+Start the Installer: Type setup-alpine and hit Enter.
+The system will now ask you questions. Type the answers below exactly:
+Select keyboard layout: Type us -> Enter.
+Select variant: Type us -> Enter.
+Enter system hostname: Type a -> Enter.
+Which one do you want to initialize? (eth0): Press Enter (Accept default).
+Ip address for eth0? (dhcp): Press Enter (Accept default).
+Do you want to do any manual network configuration? (no): Press Enter.
+Change password for root: Type a simple password (e.g., 1234) -> Enter -> Retype it > Enter.
+Which timezone? (UTC): Type UTC -> Enter.
+HTTP/FTP proxy URL? (none): Press Enter.
+Which NTP client? (chrony): Press Enter.
+Enter mirror number (1): Type 1 -> Enter (This picks the fastest server).
+Setup a user? (no): Press Enter.
+Which ssh server? (openssh): Press Enter.
+
+ CRITICAL STEP
+Which disk(s) would you like to use? (none): Type sda and hit Enter.
+How would you like to use it? (sys/data/lvm/...) [?]: Type sys and hit Enter.
+o Explanation: "Sys" installs it to your hard drive permanently.
+Erase the above disk(s) and continue? (y/n): Type y -> Enter.
+It will now install. When it says "Installation is complete":
+Type poweroff.
+In VirtualBox, go to Settings > Storage.
+Right-click the Alpine ISO (disc icon) and select "Remove Disk from Virtual Drive". (Otherwise, it will boot into the installer again).
+Start the VM again.
+
+
+
+Practical No: 05
+Aim: Deploy applications using Docker
+
+Phase 1: Unlock the "Community" Repository
+vi /etc/apk/repositories
+(Note: vi is a text editor).
+Use the arrow keys to move the cursor down to the line that ends with .../community. It probably has a # at the start.
+Place cursor on the # and press x to delete it.
+Type :wq and hit Enter (This means "Write and Quit").
+
+Phase 2: Install Docker Type these commands:
+Update the library apk update
+Install Docker apk add docker
+Start Docker automatically on boot rc-update add docker boot
+Start Docker right now service docker start
+
+Phase 3: Verify
+Run this command to test if it works: docker run hello-world
+If you see a message saying "Hello from Docker!".
+
+
+
+Practical No : 06
+Aim : Deploy applications in a Kubernetes cluster
+
+Step 1: Initialize the Cluster
+docker swarm init
+
+Step 2: Deploy a Web Server Cluster
+docker service create --name my-web --replicas 3 -p 8080:80 nginx
+
+Step 3: Check if your cluster is running:
+docker service ps my-web
+
+Step 4: Configure VirtualBox Settings
+Shutdown Alpine:    In the Alpine terminal, type: poweroff
+
+Open Settings:    In VirtualBox manager, right-click AlpineCloud and select Settings.
+Network Tab:
+Click Network in the left menu.
+Look at Adapter 1.
+Attached to: Change from "NAT" to Bridged Adapter.
+Name: This is crucial. Select the network adapter you are currently using for internet on your Windows PC.
+If on WiFi: Select your Wireless/Intel/Realtek WiFi adapter.
+If on LAN cable: Select your Ethernet/GbE Family Controller.
+Click OK.
+
+Step 5 : Get the New IP Address
+Start the VM and login as root.
+
+Find the IP: Type the following command:
+ip addr
+
+Analyze the Output:
+Look for the eth0 section again.
+You are looking for the number next to inet.
+It will look different. Instead of 10.0.2.15, it will look like your home network, e.g., 192.168.1.15 or 192.168.0.105.
+Write this number down. (it's YOUR_NEW_IP).
+
+Step 6 : Verify Docker is running  (run following commands)
+Check if Docker is running:   service docker status
+If it's stopped, start it:   service docker start
+Check your cluster:   docker service ls
+docker service create --name my-web --replicas 3 -p 8080:80 nginx
+
+Step 7 : The Moment of Truth (Windows Browser)
+Open Google Chrome (or Edge) on your Windows PC.
+In the address bar, type: / http://192.168.0.128:8080/
+
+
+
+Practical No: 7
+Aim: Set up Identity and Access Management (IAM)
+
+Phase 1: Create the User
+1. IAM -->Users
+4. Click the orange "Create user" button.
+5. User details:
+   User name: Admin-Student.
+   Checkbox: Select "Provide user access to the AWS Management Console".
+   User type: Select "I want to create an IAM user".
+   Console password: Select "Custom password" and type a simple password you will remember.
+   Uncheck "Users must create a new password at next sign-in" (saves time).
+6. Click Next.
+
+Phase 2: Grant Permissions
+1. Permissions options: Select "Attach policies directly".
+2. In the search box, type AdministratorAccess.
+   Check the box next to AdministratorAccess.
+3. Click Next.--> Review and click "Create user".
+
+Phase 3: The Critical Login URL
+You will see a green success screen.
+Look for the "Console sign-in URL". It looks like: https://123456789.signin.aws.amazon.com/console.
+Copy this URL and save it to a sticky note or text file. This is your specific login door.
+
+
+
+Practical No. 8
+Aim: - Host a simple web application in the cloud
+Steps: -
+Phase 1: Create the Website File
+3. Paste this simple HTML code:
+&lt;html&gt;
+&lt;body style="background-color:skyblue; text-align:center"&gt;
+    &lt;h1&gt;Welcome to My Cloud Website!&lt;/h1&gt;
+    &lt;p&gt;Hosted on AWS S3 by a TYBSc CS Student.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+4. Save the file as index.html
+
+Phase 2: Configure the Bucket
+1. Go to the S3 Console.
+Create a new bucket:
+Block Public Access settings:
+Uncheck "Block all public access".
+Click Create bucket.
+
+Phase 3: Upload and Enable Hosting
+1. Click your new bucket name.
+2. Click Upload -> Add files -> Select your index1.html -> Upload.
+3. Once uploaded, click the Properties tab (top menu).
+4. Scroll to the very bottom to "Static website hosting".
+Click Edit.
+Static website hosting: Select Enable.
+Index document: Type index.html.
+8. Click Save changes.
+
+Phase 4: The Final Policy
+Click the Permissions tab.
+2. Scroll down to Bucket policy and click Edit
+JSON
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+        }
+    ]
+}
+4. Click Save changes.
+
+Phase 5: Visit Your Website
+Go back to the Properties tab.
+Scroll to the bottom "Static website hosting" section.
+You will see a link labeled "Bucket website endpoint".
+Click it.
+
+
+
+Practical No: 09
+Aim: Implement access controls and encryption for cloud storage
+
+Phase 1: Create the "Vault" Bucket
+Go to the S3 Console 🡪Click Create bucket.
+Bucket Name: my-server-bucket-vault
+Check "Block all public access". (This must be ON).
+Encryption type: Select Server-side encryption with Amazon S3 managed keys (SSE-S3).
+Bucket Key: Enable.
+Click Create bucket.
+
+Phase 2: Verify Encryption
+Create a text file named secret-codes.txt on your PC.
+Upload it to your new my-server-bucket-vault bucket.
+Once uploaded, click the file name 🡪Server-side encryption settings
+Look for the Checkmark: You should see "SSE-S3" listed means, Your file is now encrypted.
+Output:
+
+Phase 3: Implement Access Controls (The IP Lock)
+Step 1: Get your Public IP
+Open a new browser tab and search Google for: "what is my ip".
+Copy the IP address shown (e.g., 103.45.xx.xx).
+
+Step 2: Create the Policy
+Go to your bucket's Permissions 🡪Bucket policy 🡪click Edit.
+Paste the following JSON code 🡪Click Save changes.
+{
+    "Version": "2012-10-17",
+    "Id": "S3PolicyId1",
+    "Statement": [
+        {
+            "Sid": "IPAllow",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::YOUR-BUCKET-NAME",
+                "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+            ],
+            "Condition": {
+                "NotIpAddress": {
+                    "aws:SourceIp": "YOUR-IP-ADDRESS/32"
+                }
+            }
+        }
+    ]
+}
+
+Phase 4: The Hacker Test
+Test 1: Access from your PC (Authorized)
+Go to the bucket and try to Open or Download the secret-codes.txt.
+It should work perfectly because you are on the "Allowed" WiFi/Network.
+
+Test 2: Access from a "Hacker" (Unauthorized)
+Disconnect your phone from WiFi (use 4G/5G mobile data).
+On your phone, log in to the AWS Console.
+Try to view the file.
+Result: You should get an "Access Denied" or "403 Forbidden" error.
+
+
+
+Practical 10
+Aim:-Set up firewall rules and a VPN for secure access.
+Phase 1: Configure Firewall Rules (Security Groups) 
+Steps:
+Go to the EC2 Console and select your running instance.
+Click the Security tab (bottom middle).
+Click the blue link under Security groups (e.g., sg-0abc123...).
+
+Edit Inbound Rules:
+Click "Edit inbound rules".
+Rule 1 (SSH): Find the SSH rule. Change "Source" from 0.0.0.0/0 (Anywhere) to "My IP".
+Rule 2 (VPN): Click "Add rule".
+Type: Custom UDP (OpenVPN uses UDP for speed).
+Port range: 1194.
+Source: 0.0.0.0/0 (Anywhere).
+Click "Save rules".
+
+Phase 2: Install the VPN Server
+Step 1: Connect to your Server
+ssh -i "MyKey.pem" ec2-user@YOUR_AWS_IP
+
+Step 2: Download and Run the Installer
+Copy and paste this command:
+wget https://git.io/vpn -O openvpn-install.sh && sudo bash openvpn-install.sh
+
+Step 3: Answer the Wizard Questions
+Public IPv4 address: [Press Enter] (It detects your AWS IP).
+Protocol: [Press Enter] (UDP).
+Port: [Press Enter] (1194).
+DNS Server: Select Google (Type 1 or 2) or Current System Resolvers.
+Client Name: Type student-laptop.
+Press any key to continue...
+
+Phase 3: Get the "Key" to your Windows PC 🗝️
+Display the file content:
+Type this command in your PowerShell terminal:
+sudo cat /root/student-laptop.ovpn
+
+Copy the text:
+You will see a huge block of text starting with client and ending with &lt;/tls-crypt&gt;.
+Scroll up and select ALL of that text and copy.
+Open Notepad on your PC.
+Paste the text.
+Save As: my-aws-vpn.ovpn (Make sure "Save as type" is "All Files", not .txt).
+
+Phase 4: Connect and Verify
+Step 1: Download the Client
+1.Go to the https://openvpn.net/client/
+2. Download and install "OpenVPN Connect for Windows".
+
+Step 2: Import the Profile
+Open the OpenVPN Connect app.
+Click the "File" tab (or the Import icon).
+Drag and drop your my-aws-vpn.ovpn file into the window.
+Click Connect.
+
+Step 3: The Magic Verification ✨
+If the toggle turns Green, you are connected!`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

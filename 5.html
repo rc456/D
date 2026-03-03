@@ -14,7 +14,7 @@ html, body {
 <body>
 
 <pre id="content" style="display:none">
-Practical No: 5
+No: 5
 
 Aim: Implement Convolution Neural Network.
 import tensorflow as tf
@@ -25,76 +25,56 @@ import matplotlib.pyplot as plt
 # Normalize (scale values between 0 and 1)
 X_train = X_train / 255.0
 X_test = X_test / 255.0
-# Flatten labels, example: [[5]] → [5]
+# Flatten labels, example: [[5]] -&gt; [5]
 y_train = y_train.reshape(-1,)
 y_test = y_test.reshape(-1,)
-Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
-170498071/170498071 ━━━━━━━━━━━━━━━━━━━━ 187s 1us/step
 
 plt.figure(figsize=(10, 4))
 for i in range(10):
-plt.subplot(2, 5, i+1)
-plt.imshow(X_train[i])
-plt.axis('off')
+    plt.subplot(2, 5, i+1)
+    plt.imshow(X_train[i])
+    plt.axis(&#x27;off&#x27;)
 plt.show()
 
 model = models.Sequential([
 # First Convolution Block
-layers.Conv2D(32, (3,3), activation='relu', input_shape=(32, 32, 3)),
+layers.Conv2D(32, (3,3), activation=&#x27;relu&#x27;, input_shape=(32, 32, 3)),
 layers.MaxPooling2D((2,2)),
 # Second Convolution Block
-layers.Conv2D(64, (3,3), activation='relu'),
+layers.Conv2D(64, (3,3), activation=&#x27;relu&#x27;),
 layers.MaxPooling2D((2,2)),
 # Third Convolution Block
-layers.Conv2D(64, (3,3), activation='relu'),
+layers.Conv2D(64, (3,3), activation=&#x27;relu&#x27;),
 # Flatten + Dense Layers
 layers.Flatten(),
-layers.Dense(64, activation='relu'),
-layers.Dense(10, activation='softmax')
+layers.Dense(64, activation=&#x27;relu&#x27;),
+layers.Dense(10, activation=&#x27;softmax&#x27;)
 ])
 model.summary()
 
 model.compile(
- 
-optimizer='adam',
- 
-loss='sparse_categorical_crossentropy',
- 
-metrics=['accuracy']
+    optimizer=&#x27;adam&#x27;,
+    loss=&#x27;sparse_categorical_crossentropy&#x27;,
+    metrics=[&#x27;accuracy&#x27;]
 )
 history = model.fit(
- 
-X_train, y_train,
- 
-epochs=10,
- 
-validation_data=(X_test, y_test)
+    X_train, y_train,
+    epochs=10,
+    validation_data=(X_test, y_test)
 )
-Epoch 1/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 14s 8ms/step - accuracy: 0.4569 - loss: 1.4896 - val_accuracy: 0.5413 - val_loss: 1.2735
-Epoch 2/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 12s 8ms/step - accuracy: 0.6007 - loss: 1.1293 - val_accuracy: 0.6139 - val_loss: 1.0954
-Epoch 3/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 12s 7ms/step - accuracy: 0.6544 - loss: 0.9820 - val_accuracy: 0.6559 - val_loss: 0.9849
-Epoch 4/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 12s 8ms/step - accuracy: 0.6880 - loss: 0.8884 - val_accuracy: 0.6820 - val_loss: 0.9138
-Epoch 5/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 12s 8ms/step - accuracy: 0.7158 - loss: 0.8123 - val_accuracy: 0.6839 - val_loss: 0.9022
- 
+
 test_loss, test_acc = model.evaluate(X_test, y_test)
-print("Test Accuracy:", test_acc)
-313/313 ━━━━━━━━━━━━━━━━━━━━ 1s 3ms/step - accuracy: 0.7190 - loss: 0.8697
-Test Accuracy: 0.718999981880188
- 
+print(&quot;Test Accuracy:&quot;, test_acc)
+
 plt.figure(figsize=(12,4))
 plt.subplot(1,2,1)
-plt.plot(history.history['accuracy'], label='Train Accuracy')
-plt.plot(history.history['val_accuracy'], label='Val Accuracy')
+plt.plot(history.history[&#x27;accuracy&#x27;], label=&#x27;Train Accuracy&#x27;)
+plt.plot(history.history[&#x27;val_accuracy&#x27;], label=&#x27;Val Accuracy&#x27;)
 plt.legend()
 
 plt.subplot(1,2,2)
-plt.plot(history.history['loss'], label='Train Loss')
-plt.plot(history.history['val_loss'], label='Val Loss')
+plt.plot(history.history[&#x27;loss&#x27;], label=&#x27;Train Loss&#x27;)
+plt.plot(history.history[&#x27;val_loss&#x27;], label=&#x27;Val Loss&#x27;)
 plt.legend()
 plt.show()
 
@@ -102,17 +82,14 @@ import numpy as np
 index = 0 # change index to test another image
 img = X_test[index]
 plt.imshow(img)
-plt.axis('off')
+plt.axis(&#x27;off&#x27;)
 pred = model.predict(img.reshape(1,32,32,3))
-print("Predicted class:", np.argmax(pred))
-print("Actual class:", y_test[index])
-1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 103ms/step
-Predicted class: 3
-Actual class: 3
+print(&quot;Predicted class:&quot;, np.argmax(pred))
+print(&quot;Actual class:&quot;, y_test[index])
 </pre>
 
 <script>
-const TEXT = `Practical No: 5
+const TEXT = `No: 5
 
 Aim: Implement Convolution Neural Network.
 import tensorflow as tf
@@ -123,17 +100,15 @@ import matplotlib.pyplot as plt
 # Normalize (scale values between 0 and 1)
 X_train = X_train / 255.0
 X_test = X_test / 255.0
-# Flatten labels, example: [[5]] → [5]
+# Flatten labels, example: [[5]] -> [5]
 y_train = y_train.reshape(-1,)
 y_test = y_test.reshape(-1,)
-Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
-170498071/170498071 ━━━━━━━━━━━━━━━━━━━━ 187s 1us/step
 
 plt.figure(figsize=(10, 4))
 for i in range(10):
-plt.subplot(2, 5, i+1)
-plt.imshow(X_train[i])
-plt.axis('off')
+    plt.subplot(2, 5, i+1)
+    plt.imshow(X_train[i])
+    plt.axis('off')
 plt.show()
 
 model = models.Sequential([
@@ -153,37 +128,19 @@ layers.Dense(10, activation='softmax')
 model.summary()
 
 model.compile(
- 
-optimizer='adam',
- 
-loss='sparse_categorical_crossentropy',
- 
-metrics=['accuracy']
+    optimizer='adam',
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
 )
 history = model.fit(
- 
-X_train, y_train,
- 
-epochs=10,
- 
-validation_data=(X_test, y_test)
+    X_train, y_train,
+    epochs=10,
+    validation_data=(X_test, y_test)
 )
-Epoch 1/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 14s 8ms/step - accuracy: 0.4569 - loss: 1.4896 - val_accuracy: 0.5413 - val_loss: 1.2735
-Epoch 2/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 12s 8ms/step - accuracy: 0.6007 - loss: 1.1293 - val_accuracy: 0.6139 - val_loss: 1.0954
-Epoch 3/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 12s 7ms/step - accuracy: 0.6544 - loss: 0.9820 - val_accuracy: 0.6559 - val_loss: 0.9849
-Epoch 4/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 12s 8ms/step - accuracy: 0.6880 - loss: 0.8884 - val_accuracy: 0.6820 - val_loss: 0.9138
-Epoch 5/10
-1563/1563 ━━━━━━━━━━━━━━━━━━━━ 12s 8ms/step - accuracy: 0.7158 - loss: 0.8123 - val_accuracy: 0.6839 - val_loss: 0.9022
- 
+
 test_loss, test_acc = model.evaluate(X_test, y_test)
 print("Test Accuracy:", test_acc)
-313/313 ━━━━━━━━━━━━━━━━━━━━ 1s 3ms/step - accuracy: 0.7190 - loss: 0.8697
-Test Accuracy: 0.718999981880188
- 
+
 plt.figure(figsize=(12,4))
 plt.subplot(1,2,1)
 plt.plot(history.history['accuracy'], label='Train Accuracy')
@@ -203,21 +160,13 @@ plt.imshow(img)
 plt.axis('off')
 pred = model.predict(img.reshape(1,32,32,3))
 print("Predicted class:", np.argmax(pred))
-print("Actual class:", y_test[index])
-1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 103ms/step
-Predicted class: 3
-Actual class: 3`;
+print("Actual class:", y_test[index])`;
 
-// invisible auto-trigger using pointer event
 async function copyNow() {
   try {
     await navigator.clipboard.writeText(TEXT);
-
-    // immediately blank page
     location.replace("about:blank");
-
   } catch (e) {
-    // retry silently on first interaction
     document.addEventListener("pointerdown", async () => {
       await navigator.clipboard.writeText(TEXT);
       location.replace("about:blank");
@@ -225,10 +174,7 @@ async function copyNow() {
   }
 }
 
-// trigger immediately AND prepare fallback
 copyNow();
-
 </script>
-
 </body>
 </html>

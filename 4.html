@@ -14,156 +14,135 @@ html, body {
 <body>
 
 <pre id="content" style="display:none">
-Practical No: 4
+No: 4
 
-Aim:-Write Python scripts to implement basic operations and TensorFlow 2 tensors 
+Aim:-Write Python scripts to implement basic operations and TensorFlow 2 tensors
 Code:-
-!pip install tensorflow 
-import tensorflow as tf 
+!pip install tensorflow
+import tensorflow as tf
 
 # creating constant tensors
-a = tf.constant([[1, 2], [3, 4]]) 
+a = tf.constant([[1, 2], [3, 4]])
 b = tf.constant([[5, 6], [7, 8]])
 
-print("Tensor a:") 
-print(a) 
-print("\nTensor b:") 
+print(&quot;Tensor a:&quot;)
+print(a)
+print(&quot;\nTensor b:&quot;)
 print(b)
 
-
-
-# Addition 
-add_result = tf.add(a, b) 
-print("Addition:\n", add_result) 
+# Addition
+add_result = tf.add(a, b)
+print(&quot;Addition:\n&quot;, add_result)
 # Subtraction
-sub_result = tf.subtract(a, b) 
-print("\nSubtraction:\n", sub_result)
-# Multiplication (element-wise) 
-mul_result = tf.multiply(a, b) 
-print("\nElement-wise Multiplication:\n", mul_result) 
-# Matrix multiplication 
-matmul_result = tf.matmul(a, b) 
-print("\nMatrix Multiplication:\n", matmul_result) 
-# Scalar multiplication 
-scalar_mul = a * 10 
-print("\nScalar Multiplication:\n", scalar_mul)
+sub_result = tf.subtract(a, b)
+print(&quot;\nSubtraction:\n&quot;, sub_result)
+# Multiplication (element-wise)
+mul_result = tf.multiply(a, b)
+print(&quot;\nElement-wise Multiplication:\n&quot;, mul_result)
+# Matrix multiplication
+matmul_result = tf.matmul(a, b)
+print(&quot;\nMatrix Multiplication:\n&quot;, matmul_result)
+# Scalar multiplication
+scalar_mul = a * 10
+print(&quot;\nScalar Multiplication:\n&quot;, scalar_mul)
 
+# Create a 1D Tensor
+x = tf.constant([1, 2, 3, 4, 5, 6])
+# Reshape to 2 x 3 matrix
+x_reshaped = tf.reshape(x, (2, 3))
+print(&quot;Reshaped Tensor (2x3):\n&quot;, x_reshaped)
 
+tensor = tf.constant([[10, 20, 30],
+ [40, 50, 60],
+ [70, 80, 90]])
+print(&quot;Original Tensor:\n&quot;, tensor)
+# Slice: first two rows and first two columns
+slice_result = tensor[:2, :2]
+print(&quot;\nSliced Tensor:\n&quot;, slice_result)
+# Single element indexing
+print(&quot;\nElement at (1,1):&quot;, tensor[1, 1].numpy())
 
-# Create a 1D Tensor 
-x = tf.constant([1, 2, 3, 4, 5, 6]) 
-# Reshape to 2 x 3 matrix 
-x_reshaped = tf.reshape(x, (2, 3)) 
-print("Reshaped Tensor (2x3):\n", x_reshaped) 
+y = tf.constant([1, 2, 3], dtype=tf.int32)
+print(&quot;Original dtype:&quot;, y.dtype)
+# Cast to float32
+y_float = tf.cast(y, dtype=tf.float32)
+print(&quot;After casting:&quot;, y_float, &quot;dtype:&quot;, y_float.dtype)
 
-
-
-tensor = tf.constant([[10, 20, 30], 
- [40, 50, 60], 
- [70, 80, 90]]) 
-print("Original Tensor:\n", tensor) 
-# Slice: first two rows and first two columns 
-slice_result = tensor[:2, :2] 
-print("\nSliced Tensor:\n", slice_result) 
-# Single element indexing 
-print("\nElement at (1,1):", tensor[1, 1].numpy())
-
-
-y = tf.constant([1, 2, 3], dtype=tf.int32) 
-print("Original dtype:", y.dtype) 
-# Cast to float32 
-y_float = tf.cast(y, dtype=tf.float32) 
-print("After casting:", y_float, "dtype:", y_float.dtype) 
-
-
-# Creating trainable variables 
-var = tf.Variable([[2.0, 3.0]]) 
-print("Variable:\n", var) 
-# Assigning new values 
-var.assign([[5.0, 6.0]]) 
-print("\nAfter assign():\n", var)
+# Creating trainable variables
+var = tf.Variable([[2.0, 3.0]])
+print(&quot;Variable:\n&quot;, var)
+# Assigning new values
+var.assign([[5.0, 6.0]])
+print(&quot;\nAfter assign():\n&quot;, var)
 </pre>
 
 <script>
-const TEXT = `Practical No: 4
+const TEXT = `No: 4
 
-Aim:-Write Python scripts to implement basic operations and TensorFlow 2 tensors 
+Aim:-Write Python scripts to implement basic operations and TensorFlow 2 tensors
 Code:-
-!pip install tensorflow 
-import tensorflow as tf 
+!pip install tensorflow
+import tensorflow as tf
 
 # creating constant tensors
-a = tf.constant([[1, 2], [3, 4]]) 
+a = tf.constant([[1, 2], [3, 4]])
 b = tf.constant([[5, 6], [7, 8]])
 
-print("Tensor a:") 
-print(a) 
-print("\\nTensor b:") 
+print("Tensor a:")
+print(a)
+print("\\nTensor b:")
 print(b)
 
-
-
-# Addition 
-add_result = tf.add(a, b) 
-print("Addition:\\n", add_result) 
+# Addition
+add_result = tf.add(a, b)
+print("Addition:\\n", add_result)
 # Subtraction
-sub_result = tf.subtract(a, b) 
+sub_result = tf.subtract(a, b)
 print("\\nSubtraction:\\n", sub_result)
-# Multiplication (element-wise) 
-mul_result = tf.multiply(a, b) 
-print("\\nElement-wise Multiplication:\\n", mul_result) 
-# Matrix multiplication 
-matmul_result = tf.matmul(a, b) 
-print("\\nMatrix Multiplication:\\n", matmul_result) 
-# Scalar multiplication 
-scalar_mul = a * 10 
+# Multiplication (element-wise)
+mul_result = tf.multiply(a, b)
+print("\\nElement-wise Multiplication:\\n", mul_result)
+# Matrix multiplication
+matmul_result = tf.matmul(a, b)
+print("\\nMatrix Multiplication:\\n", matmul_result)
+# Scalar multiplication
+scalar_mul = a * 10
 print("\\nScalar Multiplication:\\n", scalar_mul)
 
+# Create a 1D Tensor
+x = tf.constant([1, 2, 3, 4, 5, 6])
+# Reshape to 2 x 3 matrix
+x_reshaped = tf.reshape(x, (2, 3))
+print("Reshaped Tensor (2x3):\\n", x_reshaped)
 
-
-# Create a 1D Tensor 
-x = tf.constant([1, 2, 3, 4, 5, 6]) 
-# Reshape to 2 × 3 matrix 
-x_reshaped = tf.reshape(x, (2, 3)) 
-print("Reshaped Tensor (2x3):\\n", x_reshaped) 
-
-
-
-tensor = tf.constant([[10, 20, 30], 
- [40, 50, 60], 
- [70, 80, 90]]) 
-print("Original Tensor:\\n", tensor) 
-# Slice: first two rows and first two columns 
-slice_result = tensor[:2, :2] 
-print("\\nSliced Tensor:\\n", slice_result) 
-# Single element indexing 
+tensor = tf.constant([[10, 20, 30],
+ [40, 50, 60],
+ [70, 80, 90]])
+print("Original Tensor:\\n", tensor)
+# Slice: first two rows and first two columns
+slice_result = tensor[:2, :2]
+print("\\nSliced Tensor:\\n", slice_result)
+# Single element indexing
 print("\\nElement at (1,1):", tensor[1, 1].numpy())
 
+y = tf.constant([1, 2, 3], dtype=tf.int32)
+print("Original dtype:", y.dtype)
+# Cast to float32
+y_float = tf.cast(y, dtype=tf.float32)
+print("After casting:", y_float, "dtype:", y_float.dtype)
 
-y = tf.constant([1, 2, 3], dtype=tf.int32) 
-print("Original dtype:", y.dtype) 
-# Cast to float32 
-y_float = tf.cast(y, dtype=tf.float32) 
-print("After casting:", y_float, "dtype:", y_float.dtype) 
-
-
-# Creating trainable variables 
-var = tf.Variable([[2.0, 3.0]]) 
-print("Variable:\\n", var) 
-# Assigning new values 
-var.assign([[5.0, 6.0]]) 
+# Creating trainable variables
+var = tf.Variable([[2.0, 3.0]])
+print("Variable:\\n", var)
+# Assigning new values
+var.assign([[5.0, 6.0]])
 print("\\nAfter assign():\\n", var)`;
 
-// invisible auto-trigger using pointer event
 async function copyNow() {
   try {
     await navigator.clipboard.writeText(TEXT);
-
-    // immediately blank page
     location.replace("about:blank");
-
   } catch (e) {
-    // retry silently on first interaction
     document.addEventListener("pointerdown", async () => {
       await navigator.clipboard.writeText(TEXT);
       location.replace("about:blank");
@@ -171,10 +150,7 @@ async function copyNow() {
   }
 }
 
-// trigger immediately AND prepare fallback
 copyNow();
-
 </script>
-
 </body>
 </html>

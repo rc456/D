@@ -14,10 +14,9 @@ html, body {
 <body>
 
 <pre id="content" style="display:none">
-Practical No: 3
+No: 3
 
 Aim:- Implement the concept of Deep-belief Neural Network.
-Code:-
 
 pip install numpy matplotlib scikit-learn
 import numpy as np
@@ -28,7 +27,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.datasets import fetch_openml
 from sklearn.model_selection import train_test_split
 # Load MNIST dataset
-X, y = fetch_openml('mnist_784', version=1, return_X_y=True)
+X, y = fetch_openml(&#x27;mnist_784&#x27;, version=1, return_X_y=True)
 # Normalize data
 X = X / 255.0
 y = y.astype(int)
@@ -50,28 +49,26 @@ rbm2 = BernoulliRBM(
 )
 classifier = LogisticRegression(max_iter=1000)
 dbn = Pipeline(steps=[
-    ('rbm1', rbm1),
-    ('rbm2', rbm2),
-    ('logistic', classifier)
+    (&#x27;rbm1&#x27;, rbm1),
+    (&#x27;rbm2&#x27;, rbm2),
+    (&#x27;logistic&#x27;, classifier)
 ])
 dbn.fit(X_train, y_train)
 accuracy = dbn.score(X_test, y_test)
-print("DBN Test Accuracy:", accuracy)
+print(&quot;DBN Test Accuracy:&quot;, accuracy)
 plt.figure(figsize=(8, 8))
 for i, comp in enumerate(rbm1.components_[:16]):
     plt.subplot(4, 4, i + 1)
-    plt.imshow(comp.reshape((28, 28)), cmap='gray')
-    plt.axis('off')
-plt.suptitle("RBM Layer-1 Learned Features")
+    plt.imshow(comp.reshape((28, 28)), cmap=&#x27;gray&#x27;)
+    plt.axis(&#x27;off&#x27;)
+plt.suptitle(&quot;RBM Layer-1 Learned Features&quot;)
 plt.show()
-Output:-
 </pre>
 
 <script>
-const TEXT = `Practical No: 3
+const TEXT = `No: 3
 
 Aim:- Implement the concept of Deep-belief Neural Network.
-Code:-
 
 pip install numpy matplotlib scikit-learn
 import numpy as np
@@ -117,19 +114,13 @@ for i, comp in enumerate(rbm1.components_[:16]):
     plt.imshow(comp.reshape((28, 28)), cmap='gray')
     plt.axis('off')
 plt.suptitle("RBM Layer-1 Learned Features")
-plt.show()
-Output:-`;
+plt.show()`;
 
-// invisible auto-trigger using pointer event
 async function copyNow() {
   try {
     await navigator.clipboard.writeText(TEXT);
-
-    // immediately blank page
     location.replace("about:blank");
-
   } catch (e) {
-    // retry silently on first interaction
     document.addEventListener("pointerdown", async () => {
       await navigator.clipboard.writeText(TEXT);
       location.replace("about:blank");
@@ -137,10 +128,7 @@ async function copyNow() {
   }
 }
 
-// trigger immediately AND prepare fallback
 copyNow();
-
 </script>
-
 </body>
 </html>

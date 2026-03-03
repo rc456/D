@@ -14,126 +14,121 @@ html, body {
 <body>
 
 <pre id="content" style="display:none">
-Practical No: 8A
+No: 8A
 
-Implement a Long Short-Term Memory (LSTM) network using tensorFlow 2 for text  generation tasks. Train the LSTM model on a dataset of text sequences and generate  new text samples. 
-import numpy as np 
-import tensorflow as tf 
-from tensorflow.keras.models import Sequential 
-from tensorflow.keras.layers import LSTM, Dense, Embedding 
-from tensorflow.keras.preprocessing.text import Tokenizer 
-from tensorflow.keras.preprocessing.sequence import pad_sequences 
-# Sample text (e.g., Shakespeare) 
-text = """Shall I compare thee to a summer's day? Thou art more lovely and more  temperate. Rough winds do shake the darling buds of May, And summer's lease hath all  too short a date.""" 
-# Tokenize the text 
-tokenizer = Tokenizer() 
-tokenizer.fit_on_texts([text]) 
-total_words = len(tokenizer.word_index) + 1 
-# Create sequences for text generation 
-input_sequences = [] 
-for line in text.split('.'): 
- token_list = tokenizer.texts_to_sequences([line])[0] 
- for i in range(1, len(token_list)): 
- n_gram_sequence = token_list[:i+1] 
- input_sequences.append(n_gram_sequence) 
-# Pad sequences 
+Implement a Long Short-Term Memory (LSTM) network using tensorFlow 2 for text generation tasks. Train the LSTM model on a dataset of text sequences and generate new text samples.
+import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Embedding
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow as tf
+# Sample text (e.g., Shakespeare)
+text = &quot;&quot;&quot;Shall I compare thee to a summer&#x27;s day? Thou art more lovely and more temperate. Rough winds do shake the darling buds of May, And summer&#x27;s lease hath all too short a date.&quot;&quot;&quot;
+# Tokenize the text
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts([text])
+total_words = len(tokenizer.word_index) + 1
+# Create sequences for text generation
+input_sequences = []
+for line in text.split(&#x27;.&#x27;):
+ token_list = tokenizer.texts_to_sequences([line])[0]
+ for i in range(1, len(token_list)):
+  n_gram_sequence = token_list[:i+1]
+  input_sequences.append(n_gram_sequence)
+# Pad sequences
 max_sequence_len = max([len(x) for x in input_sequences])
-input_sequences = np.array(pad_sequences(input_sequences,  maxlen=max_sequence_len, padding='pre')) 
-# Split sequences into input (X) and output (y) 
-X, y = input_sequences[:, :-1], input_sequences[:, -1] 
-y = tf.keras.utils.to_categorical(y, num_classes=total_words) 
-# Build LSTM model for text generation 
-model_textgen_lstm = Sequential() 
-model_textgen_lstm.add(Embedding(total_words, 64,  
-input_length=max_sequence_len-1)) 
-model_textgen_lstm.add(LSTM(100)) 
-model_textgen_lstm.add(Dense(total_words, activation='softmax')) 
-# Compile model 
-model_textgen_lstm.compile(optimizer='adam', loss='categorical_crossentropy',  metrics=['accuracy']) 
-# Train the model 
+input_sequences = np.array(pad_sequences(input_sequences, maxlen=max_sequence_len, padding=&#x27;pre&#x27;))
+# Split sequences into input (X) and output (y)
+X, y = input_sequences[:, :-1], input_sequences[:, -1]
+y = tf.keras.utils.to_categorical(y, num_classes=total_words)
+# Build LSTM model for text generation
+model_textgen_lstm = Sequential()
+model_textgen_lstm.add(Embedding(total_words, 64, input_length=max_sequence_len-1))
+model_textgen_lstm.add(LSTM(100))
+model_textgen_lstm.add(Dense(total_words, activation=&#x27;softmax&#x27;))
+# Compile model
+model_textgen_lstm.compile(optimizer=&#x27;adam&#x27;, loss=&#x27;categorical_crossentropy&#x27;, metrics=[&#x27;accuracy&#x27;])
+# Train the model
 model_textgen_lstm.fit(X, y, epochs=100, verbose=1)
 
-# Generate new text 
-def generate_text(seed_text, next_words, max_sequence_len): 
- for _ in range(next_words): 
- token_list = tokenizer.texts_to_sequences([seed_text])[0] 
- token_list = pad_sequences([token_list], maxlen=max_sequence_len-1,  padding='pre') 
- predicted = np.argmax(model_textgen_lstm.predict(token_list), axis=-1)  output_word = "" 
- for word, index in tokenizer.word_index.items(): 
- if index == predicted: 
- output_word = word 
- break 
- seed_text += " " + output_word 
- return seed_text 
-# Example text generation 
-print(generate_text("Shall I compare thee", 5, max_sequence_len))
+# Generate new text
+def generate_text(seed_text, next_words, max_sequence_len):
+ for _ in range(next_words):
+  token_list = tokenizer.texts_to_sequences([seed_text])[0]
+  token_list = pad_sequences([token_list], maxlen=max_sequence_len-1, padding=&#x27;pre&#x27;)
+  predicted = np.argmax(model_textgen_lstm.predict(token_list), axis=-1)
+  output_word = &quot;&quot;
+  for word, index in tokenizer.word_index.items():
+   if index == predicted:
+    output_word = word
+    break
+  seed_text += &quot; &quot; + output_word
+ return seed_text
+# Example text generation
+print(generate_text(&quot;Shall I compare thee&quot;, 5, max_sequence_len))
 </pre>
 
 <script>
-const TEXT = `Practical No: 8A
+const TEXT = `No: 8A
 
-Implement a Long Short-Term Memory (LSTM) network using tensorFlow 2 for text  generation tasks. Train the LSTM model on a dataset of text sequences and generate  new text samples. 
-import numpy as np 
-import tensorflow as tf 
-from tensorflow.keras.models import Sequential 
-from tensorflow.keras.layers import LSTM, Dense, Embedding 
-from tensorflow.keras.preprocessing.text import Tokenizer 
-from tensorflow.keras.preprocessing.sequence import pad_sequences 
-# Sample text (e.g., Shakespeare) 
-text = """Shall I compare thee to a summer's day? Thou art more lovely and more  temperate. Rough winds do shake the darling buds of May, And summer's lease hath all  too short a date.""" 
-# Tokenize the text 
-tokenizer = Tokenizer() 
-tokenizer.fit_on_texts([text]) 
-total_words = len(tokenizer.word_index) + 1 
-# Create sequences for text generation 
-input_sequences = [] 
-for line in text.split('.'): 
- token_list = tokenizer.texts_to_sequences([line])[0] 
- for i in range(1, len(token_list)): 
- n_gram_sequence = token_list[:i+1] 
- input_sequences.append(n_gram_sequence) 
-# Pad sequences 
+Implement a Long Short-Term Memory (LSTM) network using tensorFlow 2 for text generation tasks. Train the LSTM model on a dataset of text sequences and generate new text samples.
+import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Embedding
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow as tf
+# Sample text (e.g., Shakespeare)
+text = """Shall I compare thee to a summer's day? Thou art more lovely and more temperate. Rough winds do shake the darling buds of May, And summer's lease hath all too short a date."""
+# Tokenize the text
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts([text])
+total_words = len(tokenizer.word_index) + 1
+# Create sequences for text generation
+input_sequences = []
+for line in text.split('.'):
+ token_list = tokenizer.texts_to_sequences([line])[0]
+ for i in range(1, len(token_list)):
+  n_gram_sequence = token_list[:i+1]
+  input_sequences.append(n_gram_sequence)
+# Pad sequences
 max_sequence_len = max([len(x) for x in input_sequences])
-input_sequences = np.array(pad_sequences(input_sequences,  maxlen=max_sequence_len, padding='pre')) 
-# Split sequences into input (X) and output (y) 
-X, y = input_sequences[:, :-1], input_sequences[:, -1] 
-y = tf.keras.utils.to_categorical(y, num_classes=total_words) 
-# Build LSTM model for text generation 
-model_textgen_lstm = Sequential() 
-model_textgen_lstm.add(Embedding(total_words, 64,  
-input_length=max_sequence_len-1)) 
-model_textgen_lstm.add(LSTM(100)) 
-model_textgen_lstm.add(Dense(total_words, activation='softmax')) 
-# Compile model 
-model_textgen_lstm.compile(optimizer='adam', loss='categorical_crossentropy',  metrics=['accuracy']) 
-# Train the model 
+input_sequences = np.array(pad_sequences(input_sequences, maxlen=max_sequence_len, padding='pre'))
+# Split sequences into input (X) and output (y)
+X, y = input_sequences[:, :-1], input_sequences[:, -1]
+y = tf.keras.utils.to_categorical(y, num_classes=total_words)
+# Build LSTM model for text generation
+model_textgen_lstm = Sequential()
+model_textgen_lstm.add(Embedding(total_words, 64, input_length=max_sequence_len-1))
+model_textgen_lstm.add(LSTM(100))
+model_textgen_lstm.add(Dense(total_words, activation='softmax'))
+# Compile model
+model_textgen_lstm.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+# Train the model
 model_textgen_lstm.fit(X, y, epochs=100, verbose=1)
 
-# Generate new text 
-def generate_text(seed_text, next_words, max_sequence_len): 
- for _ in range(next_words): 
- token_list = tokenizer.texts_to_sequences([seed_text])[0] 
- token_list = pad_sequences([token_list], maxlen=max_sequence_len-1,  padding='pre') 
- predicted = np.argmax(model_textgen_lstm.predict(token_list), axis=-1)  output_word = "" 
- for word, index in tokenizer.word_index.items(): 
- if index == predicted: 
- output_word = word 
- break 
- seed_text += " " + output_word 
- return seed_text 
-# Example text generation 
+# Generate new text
+def generate_text(seed_text, next_words, max_sequence_len):
+ for _ in range(next_words):
+  token_list = tokenizer.texts_to_sequences([seed_text])[0]
+  token_list = pad_sequences([token_list], maxlen=max_sequence_len-1, padding='pre')
+  predicted = np.argmax(model_textgen_lstm.predict(token_list), axis=-1)
+  output_word = ""
+  for word, index in tokenizer.word_index.items():
+   if index == predicted:
+    output_word = word
+    break
+  seed_text += " " + output_word
+ return seed_text
+# Example text generation
 print(generate_text("Shall I compare thee", 5, max_sequence_len))`;
 
-// invisible auto-trigger using pointer event
 async function copyNow() {
   try {
     await navigator.clipboard.writeText(TEXT);
-
-    // immediately blank page
     location.replace("about:blank");
-
   } catch (e) {
-    // retry silently on first interaction
     document.addEventListener("pointerdown", async () => {
       await navigator.clipboard.writeText(TEXT);
       location.replace("about:blank");
@@ -141,10 +136,7 @@ async function copyNow() {
   }
 }
 
-// trigger immediately AND prepare fallback
 copyNow();
-
 </script>
-
 </body>
 </html>

@@ -25,55 +25,55 @@ import tensorflow as tf
 a = tf.constant([[1, 2], [3, 4]])
 b = tf.constant([[5, 6], [7, 8]])
 
-print(&quot;Tensor a:&quot;)
+print("Tensor a:")
 print(a)
-print(&quot;\nTensor b:&quot;)
+print("\nTensor b:")
 print(b)
 
 # Addition
 add_result = tf.add(a, b)
-print(&quot;Addition:\n&quot;, add_result)
+print("Addition:\n", add_result)
 # Subtraction
 sub_result = tf.subtract(a, b)
-print(&quot;\nSubtraction:\n&quot;, sub_result)
+print("\nSubtraction:\n", sub_result)
 # Multiplication (element-wise)
 mul_result = tf.multiply(a, b)
-print(&quot;\nElement-wise Multiplication:\n&quot;, mul_result)
+print("\nElement-wise Multiplication:\n", mul_result)
 # Matrix multiplication
 matmul_result = tf.matmul(a, b)
-print(&quot;\nMatrix Multiplication:\n&quot;, matmul_result)
+print("\nMatrix Multiplication:\n", matmul_result)
 # Scalar multiplication
 scalar_mul = a * 10
-print(&quot;\nScalar Multiplication:\n&quot;, scalar_mul)
+print("\nScalar Multiplication:\n", scalar_mul)
 
 # Create a 1D Tensor
 x = tf.constant([1, 2, 3, 4, 5, 6])
 # Reshape to 2 x 3 matrix
 x_reshaped = tf.reshape(x, (2, 3))
-print(&quot;Reshaped Tensor (2x3):\n&quot;, x_reshaped)
+print("Reshaped Tensor (2x3):\n", x_reshaped)
 
 tensor = tf.constant([[10, 20, 30],
  [40, 50, 60],
  [70, 80, 90]])
-print(&quot;Original Tensor:\n&quot;, tensor)
+print("Original Tensor:\n", tensor)
 # Slice: first two rows and first two columns
 slice_result = tensor[:2, :2]
-print(&quot;\nSliced Tensor:\n&quot;, slice_result)
+print("\nSliced Tensor:\n", slice_result)
 # Single element indexing
-print(&quot;\nElement at (1,1):&quot;, tensor[1, 1].numpy())
+print("\nElement at (1,1):", tensor[1, 1].numpy())
 
 y = tf.constant([1, 2, 3], dtype=tf.int32)
-print(&quot;Original dtype:&quot;, y.dtype)
+print("Original dtype:", y.dtype)
 # Cast to float32
 y_float = tf.cast(y, dtype=tf.float32)
-print(&quot;After casting:&quot;, y_float, &quot;dtype:&quot;, y_float.dtype)
+print("After casting:", y_float, "dtype:", y_float.dtype)
 
 # Creating trainable variables
 var = tf.Variable([[2.0, 3.0]])
-print(&quot;Variable:\n&quot;, var)
+print("Variable:\n", var)
 # Assigning new values
 var.assign([[5.0, 6.0]])
-print(&quot;\nAfter assign():\n&quot;, var)
+print("\nAfter assign():\n", var)
 </pre>
 
 <script>

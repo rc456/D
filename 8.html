@@ -20,7 +20,7 @@ Aim:-Music Generation: Implement a Long Short-Term Memory (LSTM) network using T
 !pip install tensorflow music21 numpy
 import glob
 from music21 import converter, instrument, note, chord, stream
-midi_files = glob.glob(r&quot;C:\Users\ckt\Downloads\America_-_Sister_Golden_Hair.mid&quot;)
+midi_files = glob.glob(r"C:\Users\ckt\Downloads\America_-_Sister_Golden_Hair.mid")
 notes = []
 for file in midi_files:
     midi = converter.parse(file)
@@ -33,8 +33,8 @@ for file in midi_files:
         if isinstance(element, note.Note):
             notes.append(str(element.pitch))
         elif isinstance(element, chord.Chord):
-            notes.append(&#x27;.&#x27;.join(str(n) for n in element.normalOrder))
-print(&quot;Total notes:&quot;, len(notes))
+            notes.append('.'.join(str(n) for n in element.normalOrder))
+print("Total notes:", len(notes))
 
 
 import numpy as np
@@ -53,7 +53,7 @@ for i in range(len(notes) - sequence_length):
     network_input.append([note_to_int[n] for n in seq_in])
     network_output.append(note_to_int[seq_out])
 n_patterns = len(network_input)
-print(&quot;Patterns:&quot;, n_patterns)
+print("Patterns:", n_patterns)
 # Reshape &amp; normalize
 X = np.reshape(network_input, (n_patterns, sequence_length, 1))
 X = X / float(n_vocab)
@@ -64,21 +64,21 @@ model = tf.keras.Sequential([
     tf.keras.layers.LSTM(512, input_shape=(X.shape[1], X.shape[2]), return_sequences=True),
     tf.keras.layers.Dropout(0.3),
     tf.keras.layers.LSTM(512),
-    tf.keras.layers.Dense(256, activation=&#x27;relu&#x27;),
+    tf.keras.layers.Dense(256, activation='relu'),
     tf.keras.layers.Dropout(0.3),
-    tf.keras.layers.Dense(n_vocab, activation=&#x27;softmax&#x27;)
+    tf.keras.layers.Dense(n_vocab, activation='softmax')
 ])
 model.compile(
-    loss=&#x27;categorical_crossentropy&#x27;,
-    optimizer=&#x27;adam&#x27;
+    loss='categorical_crossentropy',
+    optimizer='adam'
 )
 model.summary()
 
 
 
 checkpoint = tf.keras.callbacks.ModelCheckpoint(
-    &quot;music_lstm.h5&quot;,
-    monitor=&#x27;loss&#x27;,
+    "music_lstm.h5",
+    monitor='loss',
     save_best_only=True
 )
 model.fit(
@@ -89,7 +89,7 @@ model.fit(
 )
 
 
-model.load_weights(&quot;music_lstm.h5&quot;)
+model.load_weights("music_lstm.h5")
 start = np.random.randint(0, len(network_input)-1)
 pattern = network_input[start]
 int_to_note = {number: note for number, note in enumerate(pitchnames)}
@@ -106,8 +106,8 @@ for i in range(500):
 output_notes = []
 offset = 0
 for pattern in generated_notes:
-    if &#x27;.&#x27; in pattern:
-        notes_in_chord = pattern.split(&#x27;.&#x27;)
+    if '.' in pattern:
+        notes_in_chord = pattern.split('.')
         chord_notes = []
         for n in notes_in_chord:
             new_note = note.Note(int(n))
@@ -123,7 +123,7 @@ for pattern in generated_notes:
         output_notes.append(new_note)
     offset += 0.5
 midi_stream = stream.Stream(output_notes)
-midi_stream.write(&#x27;midi&#x27;, fp=&#x27;generated_music.mid&#x27;)
+midi_stream.write('midi', fp='generated_music.mid')
 </pre>
 
 <script>

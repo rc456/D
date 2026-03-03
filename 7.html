@@ -24,21 +24,21 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import tensorflow as tf
 # Sample text (e.g., Shakespeare)
-text = &quot;&quot;&quot;Shall I compare thee to a summer&#x27;s day? Thou art more lovely and more temperate. Rough winds do shake the darling buds of May, And summer&#x27;s lease hath all too short a date.&quot;&quot;&quot;
+text = """Shall I compare thee to a summer's day? Thou art more lovely and more temperate. Rough winds do shake the darling buds of May, And summer's lease hath all too short a date."""
 # Tokenize the text
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts([text])
 total_words = len(tokenizer.word_index) + 1
 # Create sequences for text generation
 input_sequences = []
-for line in text.split(&#x27;.&#x27;):
+for line in text.split('.'):
  token_list = tokenizer.texts_to_sequences([line])[0]
  for i in range(1, len(token_list)):
   n_gram_sequence = token_list[:i+1]
   input_sequences.append(n_gram_sequence)
 # Pad sequences
 max_sequence_len = max([len(x) for x in input_sequences])
-input_sequences = np.array(pad_sequences(input_sequences, maxlen=max_sequence_len, padding=&#x27;pre&#x27;))
+input_sequences = np.array(pad_sequences(input_sequences, maxlen=max_sequence_len, padding='pre'))
 # Split sequences into input (X) and output (y)
 X, y = input_sequences[:, :-1], input_sequences[:, -1]
 y = tf.keras.utils.to_categorical(y, num_classes=total_words)
@@ -46,9 +46,9 @@ y = tf.keras.utils.to_categorical(y, num_classes=total_words)
 model_textgen_lstm = Sequential()
 model_textgen_lstm.add(Embedding(total_words, 64, input_length=max_sequence_len-1))
 model_textgen_lstm.add(LSTM(100))
-model_textgen_lstm.add(Dense(total_words, activation=&#x27;softmax&#x27;))
+model_textgen_lstm.add(Dense(total_words, activation='softmax'))
 # Compile model
-model_textgen_lstm.compile(optimizer=&#x27;adam&#x27;, loss=&#x27;categorical_crossentropy&#x27;, metrics=[&#x27;accuracy&#x27;])
+model_textgen_lstm.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 # Train the model
 model_textgen_lstm.fit(X, y, epochs=100, verbose=1)
 
@@ -56,17 +56,17 @@ model_textgen_lstm.fit(X, y, epochs=100, verbose=1)
 def generate_text(seed_text, next_words, max_sequence_len):
  for _ in range(next_words):
   token_list = tokenizer.texts_to_sequences([seed_text])[0]
-  token_list = pad_sequences([token_list], maxlen=max_sequence_len-1, padding=&#x27;pre&#x27;)
+  token_list = pad_sequences([token_list], maxlen=max_sequence_len-1, padding='pre')
   predicted = np.argmax(model_textgen_lstm.predict(token_list), axis=-1)
-  output_word = &quot;&quot;
+  output_word = ""
   for word, index in tokenizer.word_index.items():
    if index == predicted:
     output_word = word
     break
-  seed_text += &quot; &quot; + output_word
+  seed_text += " " + output_word
  return seed_text
 # Example text generation
-print(generate_text(&quot;Shall I compare thee&quot;, 5, max_sequence_len))
+print(generate_text("Shall I compare thee", 5, max_sequence_len))
 </pre>
 
 <script>

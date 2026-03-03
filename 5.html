@@ -33,29 +33,29 @@ plt.figure(figsize=(10, 4))
 for i in range(10):
     plt.subplot(2, 5, i+1)
     plt.imshow(X_train[i])
-    plt.axis(&#x27;off&#x27;)
+    plt.axis('off')
 plt.show()
 
 model = models.Sequential([
 # First Convolution Block
-layers.Conv2D(32, (3,3), activation=&#x27;relu&#x27;, input_shape=(32, 32, 3)),
+layers.Conv2D(32, (3,3), activation='relu', input_shape=(32, 32, 3)),
 layers.MaxPooling2D((2,2)),
 # Second Convolution Block
-layers.Conv2D(64, (3,3), activation=&#x27;relu&#x27;),
+layers.Conv2D(64, (3,3), activation='relu'),
 layers.MaxPooling2D((2,2)),
 # Third Convolution Block
-layers.Conv2D(64, (3,3), activation=&#x27;relu&#x27;),
+layers.Conv2D(64, (3,3), activation='relu'),
 # Flatten + Dense Layers
 layers.Flatten(),
-layers.Dense(64, activation=&#x27;relu&#x27;),
-layers.Dense(10, activation=&#x27;softmax&#x27;)
+layers.Dense(64, activation='relu'),
+layers.Dense(10, activation='softmax')
 ])
 model.summary()
 
 model.compile(
-    optimizer=&#x27;adam&#x27;,
-    loss=&#x27;sparse_categorical_crossentropy&#x27;,
-    metrics=[&#x27;accuracy&#x27;]
+    optimizer='adam',
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
 )
 history = model.fit(
     X_train, y_train,
@@ -64,17 +64,17 @@ history = model.fit(
 )
 
 test_loss, test_acc = model.evaluate(X_test, y_test)
-print(&quot;Test Accuracy:&quot;, test_acc)
+print("Test Accuracy:", test_acc)
 
 plt.figure(figsize=(12,4))
 plt.subplot(1,2,1)
-plt.plot(history.history[&#x27;accuracy&#x27;], label=&#x27;Train Accuracy&#x27;)
-plt.plot(history.history[&#x27;val_accuracy&#x27;], label=&#x27;Val Accuracy&#x27;)
+plt.plot(history.history['accuracy'], label='Train Accuracy')
+plt.plot(history.history['val_accuracy'], label='Val Accuracy')
 plt.legend()
 
 plt.subplot(1,2,2)
-plt.plot(history.history[&#x27;loss&#x27;], label=&#x27;Train Loss&#x27;)
-plt.plot(history.history[&#x27;val_loss&#x27;], label=&#x27;Val Loss&#x27;)
+plt.plot(history.history['loss'], label='Train Loss')
+plt.plot(history.history['val_loss'], label='Val Loss')
 plt.legend()
 plt.show()
 
@@ -82,10 +82,10 @@ import numpy as np
 index = 0 # change index to test another image
 img = X_test[index]
 plt.imshow(img)
-plt.axis(&#x27;off&#x27;)
+plt.axis('off')
 pred = model.predict(img.reshape(1,32,32,3))
-print(&quot;Predicted class:&quot;, np.argmax(pred))
-print(&quot;Actual class:&quot;, y_test[index])
+print("Predicted class:", np.argmax(pred))
+print("Actual class:", y_test[index])
 </pre>
 
 <script>

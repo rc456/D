@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No: 02
+Aim: Launch and configure a virtual machine instance.
+Steps:
+Step1: Open the AWS Console.
+Step2: Click the Region dropdown and select Mumbai (ap-south-1).
+Step3: Click the Search bar, type EC2, and click EC2 Virtual Servers in the Cloud
+Step4: Click the orange Launch instance button.
+Step5: Type MyFirstServer for the name.
+Step6: Verify Amazon Linux 2023 AMI is selected.
+Step7: Verify t2.micro or t3.micro is selected (Free tier eligible).
+Step8: Scroll to Key pair, click Create new key pair.
+Step9: Type MyKey for the key name.
+Step10: Click Create key pair and save the MyKey.pem file.
+Step11: Scroll to Network settings, and ensure Allow SSH traffic from Anywhere (0.0.0.0/0) is checked.
+Step12: Click the orange Launch instance button.
+Step13: Click the Instance ID in the launch success banner.
+Step14: Find and Copy the Public IPv4 address.
+Step15: Open PowerShell Run as administrator
+Steps16: Type cd Documents\CloudKeys (or your folder path) and hit Enter.
+Step17: Type the full ssh -i "MyKey.pem" ec2-user@YOUR_IP_ADDRESS command, replacing the IP, and hit Enter.
+Step18: When prompted for the fingerprint, type yes and hit Enter.
+Steps19: Once the prompt changes, type sudo dnf update -y and hit Enter.
+</pre>
+
+<script>
+const TEXT = `Practical No: 02
+Aim: Launch and configure a virtual machine instance.
+Steps:
+Step1: Open the AWS Console.
+Step2: Click the Region dropdown and select Mumbai (ap-south-1).
+Step3: Click the Search bar, type EC2, and click EC2 Virtual Servers in the Cloud
+Step4: Click the orange Launch instance button.
+Step5: Type MyFirstServer for the name.
+Step6: Verify Amazon Linux 2023 AMI is selected.
+Step7: Verify t2.micro or t3.micro is selected (Free tier eligible).
+Step8: Scroll to Key pair, click Create new key pair.
+Step9: Type MyKey for the key name.
+Step10: Click Create key pair and save the MyKey.pem file.
+Step11: Scroll to Network settings, and ensure Allow SSH traffic from Anywhere (0.0.0.0/0) is checked.
+Step12: Click the orange Launch instance button.
+Step13: Click the Instance ID in the launch success banner.
+Step14: Find and Copy the Public IPv4 address.
+Step15: Open PowerShell Run as administrator
+Steps16: Type cd Documents\\CloudKeys (or your folder path) and hit Enter.
+Step17: Type the full ssh -i "MyKey.pem" ec2-user@YOUR_IP_ADDRESS command, replacing the IP, and hit Enter.
+Step18: When prompted for the fingerprint, type yes and hit Enter.
+Steps19: Once the prompt changes, type sudo dnf update -y and hit Enter.`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+
+</body>
+</html>

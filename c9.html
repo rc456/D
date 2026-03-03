@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No: 09
+Aim: Implement access controls and encryption for cloud storage
+
+Phase 1: Create the "Vault" Bucket
+Go to the S3 Console -> Click Create bucket.
+Bucket Name: my-server-bucket-vault
+Click Create bucket.
+
+Phase 2: Verify Encryption
+Create a text file named secret-codes.txt on your PC.
+Upload it to your new my-server-bucket-vault bucket.
+Once uploaded, click the file name -> Server-side encryption settings
+Look for the Checkmark: You should see "SSE-S3" listed means, Your file is now encrypted.
+
+Phase 3: Implement Access Controls (The IP Lock)
+Step 1: Get your Public IP
+Open a new browser tab and search Google for: "what is my ip".
+Copy the IP address shown (e.g., 103.45.xx.xx).
+
+Step 2: Create the Policy
+Go to your bucket's Permissions -> Bucket policy -> click Edit.
+Paste the following JSON code -> Click Save changes.
+
+Phase 4: The Hacker Test
+Test 1: Access from your PC (Authorized)
+Go to the bucket and try to Open or Download the secret-codes.txt.
+It should work perfectly because you are on the "Allowed" WiFi/Network.
+
+Test 2: Access from a "Hacker" (Unauthorized)
+Disconnect your phone from WiFi (use 4G/5G mobile data).
+On your phone, log in to the AWS Console.
+Try to view the file.
+Result: You should get an "Access Denied" or "403 Forbidden" error.
+</pre>
+
+<script>
+const TEXT = `Practical No: 09
+Aim: Implement access controls and encryption for cloud storage
+
+Phase 1: Create the "Vault" Bucket
+Go to the S3 Console -> Click Create bucket.
+Bucket Name: my-server-bucket-vault
+Click Create bucket.
+
+Phase 2: Verify Encryption
+Create a text file named secret-codes.txt on your PC.
+Upload it to your new my-server-bucket-vault bucket.
+Once uploaded, click the file name -> Server-side encryption settings
+Look for the Checkmark: You should see "SSE-S3" listed means, Your file is now encrypted.
+
+Phase 3: Implement Access Controls (The IP Lock)
+Step 1: Get your Public IP
+Open a new browser tab and search Google for: "what is my ip".
+Copy the IP address shown (e.g., 103.45.xx.xx).
+
+Step 2: Create the Policy
+Go to your bucket's Permissions -> Bucket policy -> click Edit.
+Paste the following JSON code -> Click Save changes.
+
+Phase 4: The Hacker Test
+Test 1: Access from your PC (Authorized)
+Go to the bucket and try to Open or Download the secret-codes.txt.
+It should work perfectly because you are on the "Allowed" WiFi/Network.
+
+Test 2: Access from a "Hacker" (Unauthorized)
+Disconnect your phone from WiFi (use 4G/5G mobile data).
+On your phone, log in to the AWS Console.
+Try to view the file.
+Result: You should get an "Access Denied" or "403 Forbidden" error.`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+
+</body>
+</html>

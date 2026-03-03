@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical 10
+Aim: Set up firewall rules and a VPN for secure access.
+
+Phase 1: Configure Firewall Rules (Security Groups)
+Steps:
+Go to the EC2 Console and select your running instance.
+Click the Security tab (bottom middle).
+Click the blue link under Security groups (e.g., sg-0abc123...).
+
+Edit Inbound Rules:
+Click "Edit inbound rules".
+Rule 1 (SSH): Find the SSH rule. Change "Source" from 0.0.0.0/0 (Anywhere) to "My IP".
+Rule 2 (VPN): Click "Add rule".
+Type: Custom UDP (OpenVPN uses UDP for speed).
+Port range: 1194.
+Source: 0.0.0.0/0 (Anywhere).
+Click "Save rules".
+
+Phase 2: Install the VPN Server
+Step 1: Connect to your Server
+Open PowerShell and SSH into your Amazon Linux server again:
+ssh -i "MyKey.pem" ec2-user@YOUR_AWS_IP
+
+Step 2: Download and Run the Installer
+Copy and paste this command:
+wget https://git.io/vpn -O openvpn-install.sh && sudo bash openvpn-install.sh
+
+Step 3: Answer the Wizard Questions
+Public IPv4 address: [Press Enter] (It detects your AWS IP).
+Protocol: [Press Enter] (UDP).
+Port: [Press Enter] (1194).
+DNS Server: Select Google (Type 1 or 2) or Current System Resolvers.
+Client Name: Type student-laptop.
+Press any key to continue...
+
+Phase 3: Get the "Key" to your Windows PC
+Display the file content:
+Type this command in your PowerShell terminal:
+sudo cat /root/student-laptop.ovpn
+
+Copy the text:
+You will see a huge block of text starting with client and ending with </tls-crypt>.
+Scroll up and select ALL of that text.
+Right-click (or Ctrl+C) to copy it.
+
+Create the file on Windows:
+Open Notepad on your PC.
+Paste the text.
+Save As: my-aws-vpn.ovpn (Make sure "Save as type" is "All Files", not .txt).
+Save it to your Desktop.
+
+Phase 4: Connect and Verify
+Step 1: Download the Client
+1. Go to the https://openvpn.net/client/
+2. Download and install "OpenVPN Connect for Windows".
+
+Step 2: Import the Profile
+Open the OpenVPN Connect app.
+Click the "File" tab (or the Import icon).
+Drag and drop your my-aws-vpn.ovpn file into the window.
+Click Connect.
+
+Step 3: The Magic Verification
+If the toggle turns Green, you are connected!
+</pre>
+
+<script>
+const TEXT = `Practical 10
+Aim: Set up firewall rules and a VPN for secure access.
+
+Phase 1: Configure Firewall Rules (Security Groups)
+Steps:
+Go to the EC2 Console and select your running instance.
+Click the Security tab (bottom middle).
+Click the blue link under Security groups (e.g., sg-0abc123...).
+
+Edit Inbound Rules:
+Click "Edit inbound rules".
+Rule 1 (SSH): Find the SSH rule. Change "Source" from 0.0.0.0/0 (Anywhere) to "My IP".
+Rule 2 (VPN): Click "Add rule".
+Type: Custom UDP (OpenVPN uses UDP for speed).
+Port range: 1194.
+Source: 0.0.0.0/0 (Anywhere).
+Click "Save rules".
+
+Phase 2: Install the VPN Server
+Step 1: Connect to your Server
+Open PowerShell and SSH into your Amazon Linux server again:
+ssh -i "MyKey.pem" ec2-user@YOUR_AWS_IP
+
+Step 2: Download and Run the Installer
+Copy and paste this command:
+wget https://git.io/vpn -O openvpn-install.sh && sudo bash openvpn-install.sh
+
+Step 3: Answer the Wizard Questions
+Public IPv4 address: [Press Enter] (It detects your AWS IP).
+Protocol: [Press Enter] (UDP).
+Port: [Press Enter] (1194).
+DNS Server: Select Google (Type 1 or 2) or Current System Resolvers.
+Client Name: Type student-laptop.
+Press any key to continue...
+
+Phase 3: Get the "Key" to your Windows PC
+Display the file content:
+Type this command in your PowerShell terminal:
+sudo cat /root/student-laptop.ovpn
+
+Copy the text:
+You will see a huge block of text starting with client and ending with </tls-crypt>.
+Scroll up and select ALL of that text.
+Right-click (or Ctrl+C) to copy it.
+
+Create the file on Windows:
+Open Notepad on your PC.
+Paste the text.
+Save As: my-aws-vpn.ovpn (Make sure "Save as type" is "All Files", not .txt).
+Save it to your Desktop.
+
+Phase 4: Connect and Verify
+Step 1: Download the Client
+1. Go to the https://openvpn.net/client/
+2. Download and install "OpenVPN Connect for Windows".
+
+Step 2: Import the Profile
+Open the OpenVPN Connect app.
+Click the "File" tab (or the Import icon).
+Drag and drop your my-aws-vpn.ovpn file into the window.
+Click Connect.
+
+Step 3: The Magic Verification
+If the toggle turns Green, you are connected!`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+
+</body>
+</html>

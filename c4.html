@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No:04
+Aim: Set up and use virtualization software.
+Steps:
+
+Download Alpine Linux:
+Go to the Alpine Linux Downloads page.
+Look for the "Virtual" section (optimized for VirtualBox) under x86_64.
+Click to download the ISO (approx 60MB).
+
+Create the Virtual Machine:
+Open Oracle VirtualBox.
+Click New.
+Name: AlpineCloud.
+ISO Image: Select the Alpine file you just downloaded.
+Type: Linux.
+Version: Other Linux (64-bit).
+Hardware:
+RAM: 1024 MB (2 GB).
+Processors: 2 CPUs.
+Hard Disk: 20 GB (Leave as default "Create a Virtual Hard Disk Now").
+Click Finish.
+
+Phase 2: The Installation
+Start the VM. You will see text scrolling and then a login prompt.
+Login: Type root and hit Enter. (No password needed yet).
+Start the Installer: Type setup-alpine and hit Enter.
+
+The system will now ask you questions. Type the answers below exactly:
+Select keyboard layout: Type us -> Enter.
+Select variant: Type us -> Enter.
+Enter system hostname: Type a -> Enter.
+Which one do you want to initialize? (eth0): Press Enter (Accept default).
+Ip address for eth0? (dhcp): Press Enter (Accept default).
+Do you want to do any manual network configuration? (no): Press Enter.
+Change password for root: Type a simple password (e.g., 1234) -> Enter -> Retype it -> Enter.
+Which timezone? (UTC): Type UTC -> Enter.
+HTTP/FTP proxy URL? (none): Press Enter.
+Which NTP client? (chrony): Press Enter.
+Enter mirror number (1): Type 1 -> Enter (This picks the fastest server).
+Setup a user? (no): Press Enter.
+Which ssh server? (openssh): Press Enter.
+
+CRITICAL STEP
+Which disk(s) would you like to use? (none): Type sda and hit Enter.
+How would you like to use it? (sys/data/lvm/...): Type sys and hit Enter.
+Explanation: "Sys" installs it to your hard drive permanently.
+Erase the above disk(s) and continue? (y/n): Type y -> Enter.
+
+It will now install. When it says "Installation is complete":
+Type poweroff.
+In VirtualBox, go to Settings > Storage.
+Right-click the Alpine ISO (disc icon) and select "Remove Disk from Virtual Drive". (Otherwise, it will boot into the installer again).
+Start the VM again.
+</pre>
+
+<script>
+const TEXT = `Practical No:04
+Aim: Set up and use virtualization software.
+Steps:
+
+Download Alpine Linux:
+Go to the Alpine Linux Downloads page.
+Look for the "Virtual" section (optimized for VirtualBox) under x86_64.
+Click to download the ISO (approx 60MB).
+
+Create the Virtual Machine:
+Open Oracle VirtualBox.
+Click New.
+Name: AlpineCloud.
+ISO Image: Select the Alpine file you just downloaded.
+Type: Linux.
+Version: Other Linux (64-bit).
+Hardware:
+RAM: 1024 MB (2 GB).
+Processors: 2 CPUs.
+Hard Disk: 20 GB (Leave as default "Create a Virtual Hard Disk Now").
+Click Finish.
+
+Phase 2: The Installation
+Start the VM. You will see text scrolling and then a login prompt.
+Login: Type root and hit Enter. (No password needed yet).
+Start the Installer: Type setup-alpine and hit Enter.
+
+The system will now ask you questions. Type the answers below exactly:
+Select keyboard layout: Type us -> Enter.
+Select variant: Type us -> Enter.
+Enter system hostname: Type a -> Enter.
+Which one do you want to initialize? (eth0): Press Enter (Accept default).
+Ip address for eth0? (dhcp): Press Enter (Accept default).
+Do you want to do any manual network configuration? (no): Press Enter.
+Change password for root: Type a simple password (e.g., 1234) -> Enter -> Retype it -> Enter.
+Which timezone? (UTC): Type UTC -> Enter.
+HTTP/FTP proxy URL? (none): Press Enter.
+Which NTP client? (chrony): Press Enter.
+Enter mirror number (1): Type 1 -> Enter (This picks the fastest server).
+Setup a user? (no): Press Enter.
+Which ssh server? (openssh): Press Enter.
+
+CRITICAL STEP
+Which disk(s) would you like to use? (none): Type sda and hit Enter.
+How would you like to use it? (sys/data/lvm/...): Type sys and hit Enter.
+Explanation: "Sys" installs it to your hard drive permanently.
+Erase the above disk(s) and continue? (y/n): Type y -> Enter.
+
+It will now install. When it says "Installation is complete":
+Type poweroff.
+In VirtualBox, go to Settings > Storage.
+Right-click the Alpine ISO (disc icon) and select "Remove Disk from Virtual Drive". (Otherwise, it will boot into the installer again).
+Start the VM again.`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+
+</body>
+</html>

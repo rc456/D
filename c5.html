@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No: 05
+Aim: Deploy applications using Docker
+
+Phase 1: Unlock the "Community" Repository
+Alpine is so minimal that it doesn't even know what Docker is yet. We must tell it where to find it.
+Edit the repositories file:
+vi /etc/apk/repositories
+(Note: vi is a text editor).
+Use the arrow keys to move the cursor down to the line that ends with .../community. It probably has a # at the start.
+Place cursor on the # and press x to delete it.
+Type :wq and hit Enter (This means "Write and Quit").
+
+Phase 2: Install Docker Type these commands:
+Update the library:  apk update
+Install Docker:  apk add docker
+Start Docker automatically on boot:  rc-update add docker boot
+Start Docker right now:  service docker start
+
+Phase 3: Verify
+Run this command to test if it works: docker run hello-world
+If you see a message saying "Hello from Docker!".
+</pre>
+
+<script>
+const TEXT = `Practical No: 05
+Aim: Deploy applications using Docker
+
+Phase 1: Unlock the "Community" Repository
+Alpine is so minimal that it doesn't even know what Docker is yet. We must tell it where to find it.
+Edit the repositories file:
+vi /etc/apk/repositories
+(Note: vi is a text editor).
+Use the arrow keys to move the cursor down to the line that ends with .../community. It probably has a # at the start.
+Place cursor on the # and press x to delete it.
+Type :wq and hit Enter (This means "Write and Quit").
+
+Phase 2: Install Docker Type these commands:
+Update the library:  apk update
+Install Docker:  apk add docker
+Start Docker automatically on boot:  rc-update add docker boot
+Start Docker right now:  service docker start
+
+Phase 3: Verify
+Run this command to test if it works: docker run hello-world
+If you see a message saying "Hello from Docker!".`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+
+</body>
+</html>

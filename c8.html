@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No. 8
+Aim: Host a simple web application in the cloud
+
+Phase 1: Create the Website File
+1. On your Windows Desktop, create a new folder named MyCloudWebsite.
+2. Open Notepad.
+3. Paste this simple HTML code:
+&lt;html&gt;
+&lt;body style="background-color:skyblue; text-align:center"&gt;
+    &lt;h1&gt;Welcome to My Cloud Website!&lt;/h1&gt;
+    &lt;p&gt;Hosted on AWS S3 by a TYBSc CS Student.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+4. Save the file into your folder as index.html
+
+Phase 2: Configure the Bucket
+1. Go to the S3 Console.
+Create a new bucket:
+Name: my-public-website-name-2025 (Must be unique!).
+Region: Mumbai.
+Block Public Access settings:
+Uncheck "Block all public access".
+Check the warning box that says "I acknowledge that... objects may be public".
+Why? A website must be public so people can see it.
+Click Create bucket.
+
+Phase 3: Upload and Enable Hosting
+1. Click your new bucket name.
+2. Click Upload -> Add files -> Select your index1.html -> Upload.
+3. Once uploaded, click the Properties tab (top menu).
+4. Scroll to the very bottom to "Static website hosting".
+Click Edit.
+Static website hosting: Select Enable.
+Index document: Type index.html.
+8. Click Save changes.
+
+Phase 4: The Final Policy
+Even though the bucket is public, the file is still private. We need a "Bucket Policy" to open the door.
+1. Click the Permissions tab.
+2. Scroll down to Bucket policy and click Edit
+Paste this JSON code (Replace YOUR-BUCKET-NAME with your actual bucket name):
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+        }
+    ]
+}
+4. Click Save changes.
+
+Phase 5: Visit Your Website
+Go back to the Properties tab.
+Scroll to the bottom "Static website hosting" section.
+You will see a link labeled "Bucket website endpoint".
+Click it.
+</pre>
+
+<script>
+const TEXT = `Practical No. 8
+Aim: Host a simple web application in the cloud
+
+Phase 1: Create the Website File
+1. On your Windows Desktop, create a new folder named MyCloudWebsite.
+2. Open Notepad.
+3. Paste this simple HTML code:
+<html>
+<body style="background-color:skyblue; text-align:center">
+    <h1>Welcome to My Cloud Website!</h1>
+    <p>Hosted on AWS S3 by a TYBSc CS Student.</p>
+</body>
+</html>
+4. Save the file into your folder as index.html
+
+Phase 2: Configure the Bucket
+1. Go to the S3 Console.
+Create a new bucket:
+Name: my-public-website-name-2025 (Must be unique!).
+Region: Mumbai.
+Block Public Access settings:
+Uncheck "Block all public access".
+Check the warning box that says "I acknowledge that... objects may be public".
+Why? A website must be public so people can see it.
+Click Create bucket.
+
+Phase 3: Upload and Enable Hosting
+1. Click your new bucket name.
+2. Click Upload -> Add files -> Select your index1.html -> Upload.
+3. Once uploaded, click the Properties tab (top menu).
+4. Scroll to the very bottom to "Static website hosting".
+Click Edit.
+Static website hosting: Select Enable.
+Index document: Type index.html.
+8. Click Save changes.
+
+Phase 4: The Final Policy
+Even though the bucket is public, the file is still private. We need a "Bucket Policy" to open the door.
+1. Click the Permissions tab.
+2. Scroll down to Bucket policy and click Edit
+Paste this JSON code (Replace YOUR-BUCKET-NAME with your actual bucket name):
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+        }
+    ]
+}
+4. Click Save changes.
+
+Phase 5: Visit Your Website
+Go back to the Properties tab.
+Scroll to the bottom "Static website hosting" section.
+You will see a link labeled "Bucket website endpoint".
+Click it.`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+
+</body>
+</html>

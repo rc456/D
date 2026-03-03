@@ -54,7 +54,7 @@ for i in range(len(notes) - sequence_length):
     network_output.append(note_to_int[seq_out])
 n_patterns = len(network_input)
 print("Patterns:", n_patterns)
-# Reshape &amp; normalize
+# Reshape & normalize
 X = np.reshape(network_input, (n_patterns, sequence_length, 1))
 X = X / float(n_vocab)
 y = tf.keras.utils.to_categorical(network_output)

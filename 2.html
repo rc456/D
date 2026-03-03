@@ -85,7 +85,7 @@ plt.show()
 
 #Thresholding to Identify Object
 threshold = 0.3
-mask = diff &gt; threshold
+mask = diff > threshold
 plt.figure(figsize=(5,5))
 plt.imshow(mask.reshape(28,28), cmap='gray')
 plt.title("Detected Object Mask")

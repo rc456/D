@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practicle No:-13
+Aim :- write a scripts to capture screenshots of webpage during test execution
+
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+import os
+
+if not os.path.exists("screenshots"):
+    os.mkdir("screenshots")
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+
+driver.get("https://the-internet.herokuapp.com")
+driver.save_screenshot("screenshots/page_loaded.png")
+
+wait = WebDriverWait(driver, 10)
+
+checkbox_link = wait.until(
+    EC.element_to_be_clickable((By.LINK_TEXT, "Checkboxes"))
+)
+checkbox_link.click()
+
+driver.save_screenshot("screenshots/after_click.png")
+
+checkbox = wait.until(
+    EC.presence_of_element_located((By.XPATH, "//input[@type='checkbox']"))
+)
+checkbox.click()
+
+driver.save_screenshot("screenshots/checkbox_selected.png")
+
+time.sleep(2)
+driver.quit()
+</pre>
+
+<script>
+const TEXT = `Practicle No:-13
+Aim :- write a scripts to capture screenshots of webpage during test execution
+
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+import os
+
+if not os.path.exists("screenshots"):
+    os.mkdir("screenshots")
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+
+driver.get("https://the-internet.herokuapp.com")
+driver.save_screenshot("screenshots/page_loaded.png")
+
+wait = WebDriverWait(driver, 10)
+
+checkbox_link = wait.until(
+    EC.element_to_be_clickable((By.LINK_TEXT, "Checkboxes"))
+)
+checkbox_link.click()
+
+driver.save_screenshot("screenshots/after_click.png")
+
+checkbox = wait.until(
+    EC.presence_of_element_located((By.XPATH, "//input[@type='checkbox']"))
+)
+checkbox.click()
+
+driver.save_screenshot("screenshots/checkbox_selected.png")
+
+time.sleep(2)
+driver.quit()`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

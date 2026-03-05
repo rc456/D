@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no:5
+Aim: Automate enteringtext into input fields and clicking buttons on a web page.
+
+
+
+Steps:
+
+1.Open the Firefox browser and launch the Selenium IDE extension. 
+
+2.Select "Create a new project" and enter your chosen project name. 
+
+3.Rename the current test case to "Test". 
+
+4.Enter http://omayo.blogspot.com/ into the Playback Base URL field. 
+
+5.Click the "Run Current Test" (play) button to execute the initial script. 
+
+6.Press the "Record" button to start capturing your browser actions. 
+
+7.Navigate to the login section and fill in the username and password. 
+
+8.Click the "Stop Recording" button in the IDE to finish. 
+
+9.Click on the username and password steps to verify they located the login section.
+</pre>
+
+<script>
+const TEXT = `practical no:5
+Aim: Automate enteringtext into input fields and clicking buttons on a web page.
+
+
+
+Steps:
+
+1.Open the Firefox browser and launch the Selenium IDE extension. 
+
+2.Select "Create a new project" and enter your chosen project name. 
+
+3.Rename the current test case to "Test". 
+
+4.Enter http://omayo.blogspot.com/ into the Playback Base URL field. 
+
+5.Click the "Run Current Test" (play) button to execute the initial script. 
+
+6.Press the "Record" button to start capturing your browser actions. 
+
+7.Navigate to the login section and fill in the username and password. 
+
+8.Click the "Stop Recording" button in the IDE to finish. 
+
+9.Click on the username and password steps to verify they located the login section.`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

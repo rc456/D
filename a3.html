@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no:3
+Aim:- Aim: Automate the process of locating elememts using different locators(ID, Name, LinkText,XPath, Css Selector).
+
+
+
+Steps:
+1.Set the Base URL: Open Selenium IDE, click on the Playback base URL field, and type https://omayo.blogspot.com/.
+
+2.Launch the Website: Execute the command to open the URL home page.
+
+3.Perform UI Operations: Interact with various elements on the page, including the text area, buttons, dropdown buttons, and search fields.
+
+4.Locate by ID:
+In the Target field, use the ID locator (e.g., id=ta1).
+Click the Search (magnifying glass) icon to verify that the IDE locates the specific element on the page.
+
+5.Locate by Name:
+Set the Target to the name locator (e.g., name=q).
+Click search to confirm the element is identified.
+
+6.Locate by LinkText:
+Use the link text locator in the Target field (e.g., linkText=jqueryui).
+Verify the location by clicking search.
+
+7Locate by CSS Selector:
+Input the CSS selector in the Target field (e.g., css=.dropbtn).
+Confirm the element is located.
+
+8Locate by XPath:
+Click on the dropdown button and add the XPath target (e.g., xpath=//*[@class='dropbtn']).
+Click the search icon to verify that the IDE successfully locates the XPath.
+</pre>
+
+<script>
+const TEXT = `practical no:3
+Aim:- Aim: Automate the process of locating elememts using different locators(ID, Name, LinkText,XPath, Css Selector).
+
+
+
+Steps:
+1.Set the Base URL: Open Selenium IDE, click on the Playback base URL field, and type https://omayo.blogspot.com/.
+
+2.Launch the Website: Execute the command to open the URL home page.
+
+3.Perform UI Operations: Interact with various elements on the page, including the text area, buttons, dropdown buttons, and search fields.
+
+4.Locate by ID:
+In the Target field, use the ID locator (e.g., id=ta1).
+Click the Search (magnifying glass) icon to verify that the IDE locates the specific element on the page.
+
+5.Locate by Name:
+Set the Target to the name locator (e.g., name=q).
+Click search to confirm the element is identified.
+
+6.Locate by LinkText:
+Use the link text locator in the Target field (e.g., linkText=jqueryui).
+Verify the location by clicking search.
+
+7Locate by CSS Selector:
+Input the CSS selector in the Target field (e.g., css=.dropbtn).
+Confirm the element is located.
+
+8Locate by XPath:
+Click on the dropdown button and add the XPath target (e.g., xpath=//*[@class='dropbtn']).
+Click the search icon to verify that the IDE successfully locates the XPath.`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

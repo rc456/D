@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical no:4
+Aim: Write a script to automate form filling, button clicking, and checkbox selection.
+
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+ 
+def run_practical_4():
+    # 1. Launch Browser
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+   
+    try:
+        # 2. Open Website
+        print("Opening website...")
+        driver.get("https://testautomationpractice.blogspot.com/")
+       
+        # 3. Form Filling
+        print("Filling form...")
+        driver.find_element(By.ID, "name").send_keys("Student Name")
+        driver.find_element(By.ID, "email").send_keys("student@university.com")
+        driver.find_element(By.ID, "phone").send_keys("1234567890")
+       
+    
+    # 4. Checkbox Selection
+        print("Selecting checkboxes...")
+        # Clicking the 'Sunday' checkbox
+        checkbox = driver.find_element(By.ID, "sunday")
+        # Check if it is already selected before clicking (Good practice)
+        if not checkbox.is_selected():
+            checkbox.click()
+           
+        # Clicking Radio button 'Male'
+        driver.find_element(By.ID, "male").click()
+       
+        # 5. Button Clicking
+        # Note: We are clicking a simple button on the page
+        # Sometimes buttons need XPATH if they don't have IDs
+        print("Clicking button...")
+        # (This is an example button on that page)
+        # Using full XPath for precision if ID isn't unique
+        # driver.find_element(By.XPATH, "//button[contains(text(),'Click Me')]").click()
+       
+        print("Practical 4 executed successfully.")
+       
+        # Wait to observe the result
+        time.sleep(5)
+       
+    except Exception as e:
+        print(f"An error occurred: {e}")
+       
+    finally:
+        # 6. Close Browser
+        driver.quit()
+ 
+if __name__ == "__main__":
+    run_practical_4()
+</pre>
+
+<script>
+const TEXT = `Practical no:4
+Aim: Write a script to automate form filling, button clicking, and checkbox selection.
+
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+ 
+def run_practical_4():
+    # 1. Launch Browser
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+   
+    try:
+        # 2. Open Website
+        print("Opening website...")
+        driver.get("https://testautomationpractice.blogspot.com/")
+       
+        # 3. Form Filling
+        print("Filling form...")
+        driver.find_element(By.ID, "name").send_keys("Student Name")
+        driver.find_element(By.ID, "email").send_keys("student@university.com")
+        driver.find_element(By.ID, "phone").send_keys("1234567890")
+       
+    
+    # 4. Checkbox Selection
+        print("Selecting checkboxes...")
+        # Clicking the 'Sunday' checkbox
+        checkbox = driver.find_element(By.ID, "sunday")
+        # Check if it is already selected before clicking (Good practice)
+        if not checkbox.is_selected():
+            checkbox.click()
+           
+        # Clicking Radio button 'Male'
+        driver.find_element(By.ID, "male").click()
+       
+        # 5. Button Clicking
+        # Note: We are clicking a simple button on the page
+        # Sometimes buttons need XPATH if they don't have IDs
+        print("Clicking button...")
+        # (This is an example button on that page)
+        # Using full XPath for precision if ID isn't unique
+        # driver.find_element(By.XPATH, "//button[contains(text(),'Click Me')]").click()
+       
+        print("Practical 4 executed successfully.")
+       
+        # Wait to observe the result
+        time.sleep(5)
+       
+    except Exception as e:
+        print(f"An error occurred: {e}")
+       
+    finally:
+        # 6. Close Browser
+        driver.quit()
+ 
+if __name__ == "__main__":
+    run_practical_4()`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

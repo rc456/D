@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no:7
+Aim: Automate the selection of dropdown values and radio Buttons on a webpage.
+
+
+steps:
+
+redirect to the website http://omayo.blogspot.com/ 
+choose:
+1.	Volvo
+2.	Swift
+3.	Hyundai
+4.	Audi
+Step 2:- Now select sample Dropdown values 
+1)	doc 1 
+2)	Doc 2
+3)	Doc 3
+4)	Doc 4
+ 
+Step 3:- Now Select Radio options which are showing
+1)	Male
+2)	Female
+Select a Vehicle
+1)	Car
+Same for: 
+Pen,
+Book,
+Laptop 
+
+and run all the test
+</pre>
+
+<script>
+const TEXT = `practical no:7
+Aim: Automate the selection of dropdown values and radio Buttons on a webpage.
+
+
+steps:
+
+redirect to the website http://omayo.blogspot.com/ 
+choose:
+1.	Volvo
+2.	Swift
+3.	Hyundai
+4.	Audi
+Step 2:- Now select sample Dropdown values 
+1)	doc 1 
+2)	Doc 2
+3)	Doc 3
+4)	Doc 4
+ 
+Step 3:- Now Select Radio options which are showing
+1)	Male
+2)	Female
+Select a Vehicle
+1)	Car
+Same for: 
+Pen,
+Book,
+Laptop 
+
+and run all the test`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

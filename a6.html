@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no: 6
+Aim: Write a script to automate login and logout processes for a sample website.
+
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+# STEP 1 — Launch Browser
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+
+# STEP 2 — Open Website
+driver.get("https://practicetestautomation.com/practice-test-login/")
+time.sleep(2)
+
+# STEP 3 — Enter Username and Password
+driver.find_element(By.ID, "username").send_keys("student")
+driver.find_element(By.ID, "password").send_keys("Password123")
+time.sleep(1)
+
+# STEP 4 — Click Login Button
+driver.find_element(By.ID, "submit").click()
+time.sleep(2)
+
+# STEP 5 — Verify Login Success
+try:
+    success_text = driver.find_element(By.TAG_NAME, "h1").text
+    if "Logged In Successfully" in success_text:
+        print("Login Successful!")
+    else:
+        print("Login message not found.")
+except:
+    print("Login failed!")
+time.sleep(2)
+
+# STEP 6 — Logout
+try:
+    logout_button = driver.find_element(By.LINK_TEXT, "Log out")
+    logout_button.click()
+    print("Logout Successful!")
+except:
+    print("Logout button not found!")
+time.sleep(2)
+
+# STEP 7 — Close Browser
+driver.quit()
+</pre>
+
+<script>
+const TEXT = `practical no: 6
+Aim: Write a script to automate login and logout processes for a sample website.
+
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+# STEP 1 — Launch Browser
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+
+# STEP 2 — Open Website
+driver.get("https://practicetestautomation.com/practice-test-login/")
+time.sleep(2)
+
+# STEP 3 — Enter Username and Password
+driver.find_element(By.ID, "username").send_keys("student")
+driver.find_element(By.ID, "password").send_keys("Password123")
+time.sleep(1)
+
+# STEP 4 — Click Login Button
+driver.find_element(By.ID, "submit").click()
+time.sleep(2)
+
+# STEP 5 — Verify Login Success
+try:
+    success_text = driver.find_element(By.TAG_NAME, "h1").text
+    if "Logged In Successfully" in success_text:
+        print("Login Successful!")
+    else:
+        print("Login message not found.")
+except:
+    print("Login failed!")
+time.sleep(2)
+
+# STEP 6 — Logout
+try:
+    logout_button = driver.find_element(By.LINK_TEXT, "Log out")
+    logout_button.click()
+    print("Logout Successful!")
+except:
+    print("Logout button not found!")
+time.sleep(2)
+
+# STEP 7 — Close Browser
+driver.quit()`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

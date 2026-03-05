@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no: 12
+Aim: - WRITE A SCRIPT TO SELECT AND VALIDATE CHECKBOXES AND RADIO BUTTONS.
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+wait = WebDriverWait(driver, 100)
+driver.get("https://demoqa.com/automation-practice-form")
+male_radio = wait.until(EC.presence_of_element_located((By.ID, "gender-radio-1")))
+female_radio = wait.until(EC.presence_of_element_located((By.ID, "gender-radio-2")))
+driver.execute_script("arguments[0].scrollIntoView(true);", male_radio)
+driver.execute_script("arguments[0].click();", male_radio)
+print("Male selected:", male_radio.is_selected())
+print("Female selected:", female_radio.is_selected())
+driver.quit()
+
+
+ 
+CODE: - CHECKBOXE BUTTON 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.get("https://the-internet.herokuapp.com/checkboxes")
+driver.maximize_window()
+wait = WebDriverWait(driver, 10)
+checkboxes = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//input[@type='checkbox']")))
+if not checkboxes[0].is_selected():
+    checkboxes[0].click()
+if checkboxes[0].is_selected():
+    checkboxes[0].click()
+print("Checkbox 1 selected:", checkboxes[0].is_selected())
+print("Checkbox 2 selected:", checkboxes[1].is_selected())
+driver.quit()
+
+
+
+
+CODE: SELECT AND VALIDATE CHECKBOXES AND RADIO BUTTONS
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+wait = WebDriverWait(driver, 10)
+driver.get("https://the-internet.herokuapp.com/checkboxes")
+checkboxes = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//input[@type='checkbox']")))
+if not checkboxes[0].is_selected():
+    checkboxes[0].click()
+if checkboxes[1].is_selected():
+    checkboxes[1].click()
+print("Checkbox 1 selected:", checkboxes[0].is_selected())
+print("Checkbox 2 selected:", checkboxes[1].is_selected())
+driver.get("https://www.techlistic.com/p/selenium-practice-form.html")
+male_radio = wait.until(EC.presence_of_element_located((By.ID, "sex-0")))
+female_radio = wait.until(EC.presence_of_element_located((By.ID, "sex-1")))
+driver.execute_script("arguments[0].scrollIntoView(true);", male_radio)
+driver.execute_script("arguments[0].click();", male_radio)
+print("Male radio selected:", male_radio.is_selected())
+print("Female radio selected:", female_radio.is_selected())
+driver.quit()
+</pre>
+
+<script>
+const TEXT = `practical no: 12
+Aim: - WRITE A SCRIPT TO SELECT AND VALIDATE CHECKBOXES AND RADIO BUTTONS.
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+wait = WebDriverWait(driver, 100)
+driver.get("https://demoqa.com/automation-practice-form")
+male_radio = wait.until(EC.presence_of_element_located((By.ID, "gender-radio-1")))
+female_radio = wait.until(EC.presence_of_element_located((By.ID, "gender-radio-2")))
+driver.execute_script("arguments[0].scrollIntoView(true);", male_radio)
+driver.execute_script("arguments[0].click();", male_radio)
+print("Male selected:", male_radio.is_selected())
+print("Female selected:", female_radio.is_selected())
+driver.quit()
+
+
+ 
+CODE: - CHECKBOXE BUTTON 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.get("https://the-internet.herokuapp.com/checkboxes")
+driver.maximize_window()
+wait = WebDriverWait(driver, 10)
+checkboxes = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//input[@type='checkbox']")))
+if not checkboxes[0].is_selected():
+    checkboxes[0].click()
+if checkboxes[0].is_selected():
+    checkboxes[0].click()
+print("Checkbox 1 selected:", checkboxes[0].is_selected())
+print("Checkbox 2 selected:", checkboxes[1].is_selected())
+driver.quit()
+
+
+
+
+CODE: SELECT AND VALIDATE CHECKBOXES AND RADIO BUTTONS
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+wait = WebDriverWait(driver, 10)
+driver.get("https://the-internet.herokuapp.com/checkboxes")
+checkboxes = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//input[@type='checkbox']")))
+if not checkboxes[0].is_selected():
+    checkboxes[0].click()
+if checkboxes[1].is_selected():
+    checkboxes[1].click()
+print("Checkbox 1 selected:", checkboxes[0].is_selected())
+print("Checkbox 2 selected:", checkboxes[1].is_selected())
+driver.get("https://www.techlistic.com/p/selenium-practice-form.html")
+male_radio = wait.until(EC.presence_of_element_located((By.ID, "sex-0")))
+female_radio = wait.until(EC.presence_of_element_located((By.ID, "sex-1")))
+driver.execute_script("arguments[0].scrollIntoView(true);", male_radio)
+driver.execute_script("arguments[0].click();", male_radio)
+print("Male radio selected:", male_radio.is_selected())
+print("Female radio selected:", female_radio.is_selected())
+driver.quit()`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

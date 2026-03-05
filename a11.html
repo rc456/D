@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no:11
+Aim: -	Demonstrate The Use Of Implicit And Explicit Waits To Handle Dynamic Elements.
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support import expected_conditions as EC
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(20)
+wait = WebDriverWait(driver, 10)
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+driver.maximize_window()
+button = wait.until(
+    EC.element_to_be_clickable((By.XPATH, "//button"))
+)
+button.click()
+message = driver.find_element(By.ID, "finish")
+print("Message displayed:", message.text)
+driver.quit()
+ 
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+driver.maximize_window()
+
+wait = WebDriverWait(driver, 15)
+
+# Click Start button
+driver.find_element(By.XPATH, "//button").click()
+
+# Wait until text becomes visible
+message = wait.until(
+EC.visibility_of_element_located((By.ID, "finish"))
+)
+
+print("Message displayed:", message.text)
+driver.quit()
+ 
+
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+
+driver.implicitly_wait(10)  # Wait up to 10 seconds globally for all elements
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+
+wait = WebDriverWait(driver, 15)  # Wait up to 15 seconds for specific conditions
+
+# Click the Start button (element may load dynamically)
+start_button = wait.until(
+    EC.element_to_be_clickable((By.XPATH, "//button"))
+)
+start_button.click()
+
+# Wait for dynamic text to appear (visibility condition)
+dynamic_message = wait.until(
+    EC.visibility_of_element_located((By.ID, "finish"))
+)
+
+# Print the dynamic message
+print("Dynamic message displayed:", dynamic_message.text)
+
+driver.quit()
+</pre>
+
+<script>
+const TEXT = `practical no:11
+Aim: -	Demonstrate The Use Of Implicit And Explicit Waits To Handle Dynamic Elements.
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support import expected_conditions as EC
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.implicitly_wait(20)
+wait = WebDriverWait(driver, 10)
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+driver.maximize_window()
+button = wait.until(
+    EC.element_to_be_clickable((By.XPATH, "//button"))
+)
+button.click()
+message = driver.find_element(By.ID, "finish")
+print("Message displayed:", message.text)
+driver.quit()
+ 
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+driver.maximize_window()
+
+wait = WebDriverWait(driver, 15)
+
+# Click Start button
+driver.find_element(By.XPATH, "//button").click()
+
+# Wait until text becomes visible
+message = wait.until(
+EC.visibility_of_element_located((By.ID, "finish"))
+)
+
+print("Message displayed:", message.text)
+driver.quit()
+ 
+
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+
+driver.implicitly_wait(10)  # Wait up to 10 seconds globally for all elements
+driver.get("https://the-internet.herokuapp.com/dynamic_loading/1")
+
+wait = WebDriverWait(driver, 15)  # Wait up to 15 seconds for specific conditions
+
+# Click the Start button (element may load dynamically)
+start_button = wait.until(
+    EC.element_to_be_clickable((By.XPATH, "//button"))
+)
+start_button.click()
+
+# Wait for dynamic text to appear (visibility condition)
+dynamic_message = wait.until(
+    EC.visibility_of_element_located((By.ID, "finish"))
+)
+
+# Print the dynamic message
+print("Dynamic message displayed:", dynamic_message.text)
+
+driver.quit()`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

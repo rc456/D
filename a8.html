@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no: 8
+Aim: Automate the handling of JavaScript alerts, confirmation boxes, and pop-ups.
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+# STEP 1 — Launch Browser
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+# STEP 2 — Open Test Website
+driver.get("https://the-internet.herokuapp.com/javascript_alerts")
+time.sleep(2)
+# 1Handling Simple Alert
+print("\n---- SIMPLE ALERT ----")
+driver.find_element(By.XPATH, "//button[text()='Click for JS Alert']").click()
+time.sleep(2)
+alert = driver.switch_to.alert
+print("Alert text:", alert.text)
+alert.accept()        # Click OK
+time.sleep(1)
+# 2 Handling Confirmation Box
+print("\n---- CONFIRMATION ALERT ----")
+driver.find_element(By.XPATH, "//button[text()='Click for JS Confirm']").click()
+time.sleep(2)
+confirm = driver.switch_to.alert
+print("Confirmation text:", confirm.text)
+confirm.dismiss()     # Click Cancel
+time.sleep(1)
+# 3 Handling Prompt Pop-up
+print("\n---- PROMPT ALERT ----")
+driver.find_element(By.XPATH, "//button[text()='Click for JS Prompt']").click()
+time.sleep(2)
+prompt = driver.switch_to.alert
+print("Prompt text:", prompt.text)
+prompt.send_keys("Hello from Selenium!")   # Enter text into prompt
+prompt.accept()                            # Click OK
+time.sleep(2)
+# CLOSE BROWSER
+driver.quit()
+</pre>
+
+<script>
+const TEXT = `practical no: 8
+Aim: Automate the handling of JavaScript alerts, confirmation boxes, and pop-ups.
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+# STEP 1 — Launch Browser
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+# STEP 2 — Open Test Website
+driver.get("https://the-internet.herokuapp.com/javascript_alerts")
+time.sleep(2)
+# 1Handling Simple Alert
+print("\\n---- SIMPLE ALERT ----")
+driver.find_element(By.XPATH, "//button[text()='Click for JS Alert']").click()
+time.sleep(2)
+alert = driver.switch_to.alert
+print("Alert text:", alert.text)
+alert.accept()        # Click OK
+time.sleep(1)
+# 2 Handling Confirmation Box
+print("\\n---- CONFIRMATION ALERT ----")
+driver.find_element(By.XPATH, "//button[text()='Click for JS Confirm']").click()
+time.sleep(2)
+confirm = driver.switch_to.alert
+print("Confirmation text:", confirm.text)
+confirm.dismiss()     # Click Cancel
+time.sleep(1)
+# 3 Handling Prompt Pop-up
+print("\\n---- PROMPT ALERT ----")
+driver.find_element(By.XPATH, "//button[text()='Click for JS Prompt']").click()
+time.sleep(2)
+prompt = driver.switch_to.alert
+print("Prompt text:", prompt.text)
+prompt.send_keys("Hello from Selenium!")   # Enter text into prompt
+prompt.accept()                            # Click OK
+time.sleep(2)
+# CLOSE BROWSER
+driver.quit()`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

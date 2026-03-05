@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no:10
+Aim:-Automate the process of fetching and displaying data from a web table.
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+driver.get("https://the-internet.herokuapp.com/tables")
+time.sleep(2)
+table = driver.find_element(By.ID, "table1")
+headers = table.find_elements(By.TAG_NAME, "th")
+header_text = [header.text for header in headers]
+print("TABLE HEADERS:")
+print(header_text)
+print("-" * 50)
+rows = table.find_elements(By.TAG_NAME, "tr")
+print("TABLE DATA:")
+for row in rows[1:]: 
+    cells = row.find_elements(By.TAG_NAME, "td")
+    row_data = [cell.text for cell in cells]
+    print(row_data)
+time.sleep(2)
+driver.quit()
+</pre>
+
+<script>
+const TEXT = `practical no:10
+Aim:-Automate the process of fetching and displaying data from a web table.
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+driver.get("https://the-internet.herokuapp.com/tables")
+time.sleep(2)
+table = driver.find_element(By.ID, "table1")
+headers = table.find_elements(By.TAG_NAME, "th")
+header_text = [header.text for header in headers]
+print("TABLE HEADERS:")
+print(header_text)
+print("-" * 50)
+rows = table.find_elements(By.TAG_NAME, "tr")
+print("TABLE DATA:")
+for row in rows[1:]: 
+    cells = row.find_elements(By.TAG_NAME, "td")
+    row_data = [cell.text for cell in cells]
+    print(row_data)
+time.sleep(2)
+driver.quit()`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

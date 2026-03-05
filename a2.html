@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no:2 
+Aim: write a selenium script to launch a web browser and open a specified website
+
+Execution Steps
+1.Open Selenium IDE: Launch the Selenium IDE extension in your browser (such as Mozilla Firefox).
+
+2.Start a Project: Select "Create a new project" from the welcome menu.
+
+3.Name the Project: Enter a project name (e.g., "test") and click OK.
+
+4.Input the Command: In the Command field, type open.
+
+5.Set the Target URL: In the Target field, enter the website address (e.g., https://www.wikipedia.org/).
+
+6.Add a Description: In the Description field, type "open specified website".
+
+7.Run the Test: Click the "Run" icon (the play button) to execute the script.
+
+8.Verify Results: Confirm the browser opens the site and the log displays "test completed successfully."
+</pre>
+
+<script>
+const TEXT = `practical no:2 
+Aim: write a selenium script to launch a web browser and open a specified website
+
+Execution Steps
+1.Open Selenium IDE: Launch the Selenium IDE extension in your browser (such as Mozilla Firefox).
+
+2.Start a Project: Select "Create a new project" from the welcome menu.
+
+3.Name the Project: Enter a project name (e.g., "test") and click OK.
+
+4.Input the Command: In the Command field, type open.
+
+5.Set the Target URL: In the Target field, enter the website address (e.g., https://www.wikipedia.org/).
+
+6.Add a Description: In the Description field, type "open specified website".
+
+7.Run the Test: Click the "Run" icon (the play button) to execute the script.
+
+8.Verify Results: Confirm the browser opens the site and the log displays "test completed successfully."`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

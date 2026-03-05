@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no 14
+AIM: Use Actions class to perform hover, double-click, and keyboard actions.
+
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+CODE:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
+# ---------------- Setup WebDriver ----------------
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+wait = WebDriverWait(driver, 15)
+
+# Create Actions object
+actions = ActionChains(driver)
+
+# ---------------- Mouse Hover Action ----------------
+driver.get("https://demoqa.com/tool-tips")
+hover_button = wait.until(EC.presence_of_element_located((By.ID, "toolTipButton")))
+actions.move_to_element(hover_button).perform()
+print("Hovered over the button")
+
+# ---------------- Double Click Action ----------------
+driver.get("https://demoqa.com/buttons")
+double_click_btn = wait.until(EC.presence_of_element_located((By.ID, "doubleClickBtn")))
+actions.double_click(double_click_btn).perform()
+print("Double-clicked the button")
+
+# ---------------- Right Click (Context Click) ----------------
+right_click_btn = wait.until(EC.presence_of_element_located((By.ID, "rightClickBtn")))
+actions.context_click(right_click_btn).perform()
+print("Right-clicked the button")
+
+# ---------------- Keyboard Actions ----------------
+driver.get("https://demoqa.com/text-box")
+name_input = wait.until(EC.presence_of_element_located((By.ID, "userName")))
+email_input = wait.until(EC.presence_of_element_located((By.ID, "userEmail")))
+
+# Type name using Actions
+actions.click(name_input).send_keys("Vaishnavi Gharat").perform()
+print("Typed name using keyboard")
+
+# Simulate CTRL + A (select all) and CTRL + C (copy)
+actions.click(name_input).key_down(Keys.CONTROL).send_keys('a').send_keys('c').key_up(Keys.CONTROL).perform()
+print("Selected and copied text")
+
+# Paste into email field using send_keys (reliable)
+actions.click(email_input).send_keys("ckt1234@gmail.com").perform()
+print("Typed email using keyboard actions")
+
+# ---------------- Finish ----------------
+input("Press Enter to close browser...")
+driver.quit()
+driver.quit()
+</pre>
+
+<script>
+const TEXT = `practical no 14
+AIM: Use Actions class to perform hover, double-click, and keyboard actions.
+
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+CODE:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
+# ---------------- Setup WebDriver ----------------
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
+wait = WebDriverWait(driver, 15)
+
+# Create Actions object
+actions = ActionChains(driver)
+
+# ---------------- Mouse Hover Action ----------------
+driver.get("https://demoqa.com/tool-tips")
+hover_button = wait.until(EC.presence_of_element_located((By.ID, "toolTipButton")))
+actions.move_to_element(hover_button).perform()
+print("Hovered over the button")
+
+# ---------------- Double Click Action ----------------
+driver.get("https://demoqa.com/buttons")
+double_click_btn = wait.until(EC.presence_of_element_located((By.ID, "doubleClickBtn")))
+actions.double_click(double_click_btn).perform()
+print("Double-clicked the button")
+
+# ---------------- Right Click (Context Click) ----------------
+right_click_btn = wait.until(EC.presence_of_element_located((By.ID, "rightClickBtn")))
+actions.context_click(right_click_btn).perform()
+print("Right-clicked the button")
+
+# ---------------- Keyboard Actions ----------------
+driver.get("https://demoqa.com/text-box")
+name_input = wait.until(EC.presence_of_element_located((By.ID, "userName")))
+email_input = wait.until(EC.presence_of_element_located((By.ID, "userEmail")))
+
+# Type name using Actions
+actions.click(name_input).send_keys("Vaishnavi Gharat").perform()
+print("Typed name using keyboard")
+
+# Simulate CTRL + A (select all) and CTRL + C (copy)
+actions.click(name_input).key_down(Keys.CONTROL).send_keys('a').send_keys('c').key_up(Keys.CONTROL).perform()
+print("Selected and copied text")
+
+# Paste into email field using send_keys (reliable)
+actions.click(email_input).send_keys("ckt1234@gmail.com").perform()
+print("Typed email using keyboard actions")
+
+# ---------------- Finish ----------------
+input("Press Enter to close browser...")
+driver.quit()
+driver.quit()`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

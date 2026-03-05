@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+practical no 15
+Aim: Write a complete test case (e.g., searching for a product on an e-commerce site and verifying search results).\
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+CODE:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
+options = webdriver.ChromeOptions()
+options.add_argument("--start-maximized")
+options.add_argument("--disable-blink-features=AutomationControlled")
+
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+
+driver.get("https://www.amazon.in")
+
+wait = WebDriverWait(driver, 20)
+
+search_box = wait.until(
+    EC.visibility_of_element_located((By.ID, "twotabsearchtextbox"))
+)
+search_box.send_keys("Wireless Mouse")
+search_box.send_keys(Keys.RETURN)
+
+# wait for search results
+wait.until(
+    EC.presence_of_element_located(
+        (By.CSS_SELECTOR, "div[data-component-type='s-search-result']")
+    )
+)
+
+# scroll to load products
+driver.execute_script("window.scrollBy(0, 1000);")
+time.sleep(2)
+
+products = driver.find_elements(
+    By.CSS_SELECTOR, "div[data-component-type='s-search-result']"
+)
+
+print(f"Products found: {len(products)}")
+
+assert len(products) &gt; 0, "No products found"
+
+driver.quit()
+
+
+
+
+"C:\Users\JYOTI CHAUHAN\AppData\Local\Programs\Python\Python310\python.exe" -m pip install selenium webdriver-manager
+
+
+print(__import__("sys").executable)
+</pre>
+
+<script>
+const TEXT = `practical no 15
+Aim: Write a complete test case (e.g., searching for a product on an e-commerce site and verifying search results).\\
+
+1.pip install selenium webdriver-manager
+
+2.py -3.11 -m pip install selenium
+
+CODE:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
+options = webdriver.ChromeOptions()
+options.add_argument("--start-maximized")
+options.add_argument("--disable-blink-features=AutomationControlled")
+
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+
+driver.get("https://www.amazon.in")
+
+wait = WebDriverWait(driver, 20)
+
+search_box = wait.until(
+    EC.visibility_of_element_located((By.ID, "twotabsearchtextbox"))
+)
+search_box.send_keys("Wireless Mouse")
+search_box.send_keys(Keys.RETURN)
+
+# wait for search results
+wait.until(
+    EC.presence_of_element_located(
+        (By.CSS_SELECTOR, "div[data-component-type='s-search-result']")
+    )
+)
+
+# scroll to load products
+driver.execute_script("window.scrollBy(0, 1000);")
+time.sleep(2)
+
+products = driver.find_elements(
+    By.CSS_SELECTOR, "div[data-component-type='s-search-result']"
+)
+
+print(f"Products found: {len(products)}")
+
+assert len(products) > 0, "No products found"
+
+driver.quit()
+
+
+
+
+"C:\\Users\\JYOTI CHAUHAN\\AppData\\Local\\Programs\\Python\\Python310\\python.exe" -m pip install selenium webdriver-manager
+
+
+print(__import__("sys").executable)`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

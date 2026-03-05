@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No. 06
+ 
+Aim: Implement Functions: Count-Sort-Limit-Skip-Aggregate- using MongoDB.
+Steps: -
+// Step 1 &amp; 2: Create DB and Collection (MongoDB automatically creates them on first use)
+use companydb
+
+// Step 3: Insert 10 records
+db.employees.insertMany([
+  { "EmpId": 101, "Name": "Alice", "Gender": "Female", "Salary": 60000, "Dept": "HR" },
+  { "EmpId": 102, "Name": "Bob", "Gender": "Male", "Salary": 85000, "Dept": "IT" },
+  { "EmpId": 103, "Name": "Charlie", "Gender": "Male", "Salary": 75000, "Dept": "HR" },
+  { "EmpId": 104, "Name": "Diana", "Gender": "Female", "Salary": 95000, "Dept": "Sales" },
+  { "EmpId": 105, "Name": "Eve", "Gender": "Female", "Salary": 62000, "Dept": "IT" },
+  { "EmpId": 106, "Name": "Frank", "Gender": "Male", "Salary": 88000, "Dept": "Sales" },
+  { "EmpId": 107, "Name": "Grace", "Gender": "Female", "Salary": 77000, "Dept": "IT" },
+  { "EmpId": 108, "Name": "Henry", "Gender": "Male", "Salary": 55000, "Dept": "HR" },
+  { "EmpId": 109, "Name": "Ivy", "Gender": "Female", "Salary": 92000, "Dept": "Sales" },
+  { "EmpId": 110, "Name": "Jack", "Gender": "Male", "Salary": 70000, "Dept": "IT" }
+]);
+
+// Step 4: Apply below queries
+
+// A) Count Query: Count all documents
+db.employees.find().count();
+
+// Count documents matching a criteria
+db.employees.find({ "Dept": "IT" }).count();
+
+// B) Sort Query: Sort by Salary in Ascending Order (1)
+db.employees.find().sort({ "Salary": 1 });
+
+// Sort by Salary in Descending Order (-1)
+db.employees.find().sort({ "Salary": -1 });
+
+// C) Limit Query: Limit to 3 documents
+db.employees.find().limit(3);
+
+// D) Skip Query: Skip the first 3 documents
+db.employees.find().skip(3);
+
+// Limit and Skip in one query: Skip 3 documents and then limit to the next 2
+db.employees.find().skip(3).limit(2);
+
+// E) Aggregate Function
+
+// Step 4 (Match): Find documents where Dept is 'IT'
+db.employees.aggregate([ { $match: { "Dept": "IT" } } ]);
+
+// Step 5 (Group): Group by Dept
+db.employees.aggregate([ { $group: { _id: "$Dept" } } ]);
+
+// Group by Dept and sum the Salary (a common aggregation use)
+db.employees.aggregate([ { $group: { _id: "$Dept", totalSalary: { $sum: "$Salary" } } } ]);
+
+// Step 6 (Match and Count): Count employees where Dept is 'IT'
+db.employees.aggregate([ { $match: { "Dept": "IT" } }, { $count: "it_employees_count" } ]);
+</pre>
+
+<script>
+const TEXT = `Practical No. 06
+ 
+Aim: Implement Functions: Count-Sort-Limit-Skip-Aggregate- using MongoDB.
+Steps: -
+// Step 1 & 2: Create DB and Collection (MongoDB automatically creates them on first use)
+use companydb
+
+// Step 3: Insert 10 records
+db.employees.insertMany([
+  { "EmpId": 101, "Name": "Alice", "Gender": "Female", "Salary": 60000, "Dept": "HR" },
+  { "EmpId": 102, "Name": "Bob", "Gender": "Male", "Salary": 85000, "Dept": "IT" },
+  { "EmpId": 103, "Name": "Charlie", "Gender": "Male", "Salary": 75000, "Dept": "HR" },
+  { "EmpId": 104, "Name": "Diana", "Gender": "Female", "Salary": 95000, "Dept": "Sales" },
+  { "EmpId": 105, "Name": "Eve", "Gender": "Female", "Salary": 62000, "Dept": "IT" },
+  { "EmpId": 106, "Name": "Frank", "Gender": "Male", "Salary": 88000, "Dept": "Sales" },
+  { "EmpId": 107, "Name": "Grace", "Gender": "Female", "Salary": 77000, "Dept": "IT" },
+  { "EmpId": 108, "Name": "Henry", "Gender": "Male", "Salary": 55000, "Dept": "HR" },
+  { "EmpId": 109, "Name": "Ivy", "Gender": "Female", "Salary": 92000, "Dept": "Sales" },
+  { "EmpId": 110, "Name": "Jack", "Gender": "Male", "Salary": 70000, "Dept": "IT" }
+]);
+
+// Step 4: Apply below queries
+
+// A) Count Query: Count all documents
+db.employees.find().count();
+
+// Count documents matching a criteria
+db.employees.find({ "Dept": "IT" }).count();
+
+// B) Sort Query: Sort by Salary in Ascending Order (1)
+db.employees.find().sort({ "Salary": 1 });
+
+// Sort by Salary in Descending Order (-1)
+db.employees.find().sort({ "Salary": -1 });
+
+// C) Limit Query: Limit to 3 documents
+db.employees.find().limit(3);
+
+// D) Skip Query: Skip the first 3 documents
+db.employees.find().skip(3);
+
+// Limit and Skip in one query: Skip 3 documents and then limit to the next 2
+db.employees.find().skip(3).limit(2);
+
+// E) Aggregate Function
+
+// Step 4 (Match): Find documents where Dept is 'IT'
+db.employees.aggregate([ { $match: { "Dept": "IT" } } ]);
+
+// Step 5 (Group): Group by Dept
+db.employees.aggregate([ { $group: { _id: "$Dept" } } ]);
+
+// Group by Dept and sum the Salary (a common aggregation use)
+db.employees.aggregate([ { $group: { _id: "$Dept", totalSalary: { $sum: "$Salary" } } } ]);
+
+// Step 6 (Match and Count): Count employees where Dept is 'IT'
+db.employees.aggregate([ { $match: { "Dept": "IT" } }, { $count: "it_employees_count" } ]);`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

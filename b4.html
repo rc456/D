@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No – 04 
+Aim:- Install and Configure MongoDB/ Cassandra to execute NOSQL Commands. 
+Install MongoDB 
+Step 1: Go to Chrome 
+Step 2: https://www.mongodb.com 
+Step 3: Product 🠪Community Edition. 
+Step 4: Click on MongoDB Community Edition. 
+Step 5: MongoDB Community Server Download. 
+Step 6: Select this Version. 
+Step 7: Then Click on download. Install it. 
+After Installation, Open MongoDb Compass and connect to localhost and create new Collection.
+Click on open Mongodb Shell button on top right.
+1. Switch to a Database
+use myDatabase
+2. Show All Collections in the Database
+show collections
+3. Insert a Single Document into a Collection
+db.users.insertOne({ name: "Alex", age: 25 })
+4. Insert Multiple Documents into a Collection
+db.users.insertMany([{ name: "Aniket" }, { name: "Sam" }])
+5. Retrieve All Documents from a Collection
+db.users.find()
+6. Retrieve Documents Matching a Condition
+db.users.find({ age: 25 })
+7. Retrieve a Single Document Matching a Condition
+db.users.findOne({ name: "Aniket" })
+8. Delete a Single Document from a Collection
+db.users.deleteOne({ name: "Alex" })
+9. Delete Multiple Documents with Specific Names
+db.users.deleteMany({ name: { $in: ["AK", "Sam"] } })
+</pre>
+
+<script>
+const TEXT = `Practical No – 04 
+Aim:- Install and Configure MongoDB/ Cassandra to execute NOSQL Commands. 
+Install MongoDB 
+Step 1: Go to Chrome 
+Step 2: https://www.mongodb.com 
+Step 3: Product 🠪Community Edition. 
+Step 4: Click on MongoDB Community Edition. 
+Step 5: MongoDB Community Server Download. 
+Step 6: Select this Version. 
+Step 7: Then Click on download. Install it. 
+After Installation, Open MongoDb Compass and connect to localhost and create new Collection.
+Click on open Mongodb Shell button on top right.
+1. Switch to a Database
+use myDatabase
+2. Show All Collections in the Database
+show collections
+3. Insert a Single Document into a Collection
+db.users.insertOne({ name: "Alex", age: 25 })
+4. Insert Multiple Documents into a Collection
+db.users.insertMany([{ name: "Aniket" }, { name: "Sam" }])
+5. Retrieve All Documents from a Collection
+db.users.find()
+6. Retrieve Documents Matching a Condition
+db.users.find({ age: 25 })
+7. Retrieve a Single Document Matching a Condition
+db.users.findOne({ name: "Aniket" })
+8. Delete a Single Document from a Collection
+db.users.deleteOne({ name: "Alex" })
+9. Delete Multiple Documents with Specific Names
+db.users.deleteMany({ name: { $in: ["AK", "Sam"] } })`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

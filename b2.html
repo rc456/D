@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+PRACTICAL NO.2
+Aim: Write a program to implement word count program using mapreduce.
+Code:
+pip install mrjob
+
+%%writefile mrjob_wordcount3.py
+from mrjob.job import MRJob
+import re
+WORD_REGEXP = re.compile(r"[a-zA-Z]+")
+class MRWordCount(MRJob):
+  def mapper(self,_,line):
+    for word in WORD_REGEXP.findall(line):
+      yield (word.lower(),1)
+  def reducer(self,word,counts):
+    yield (word,sum(counts))
+if __name__ == "__main__":
+  MRWordCount.run()
+
+
+%%writefile INPUT_TEXT1.txt
+Hello world
+Hello Google Colab 
+MapReduce word count example
+Hello MapReduce
+
+
+!python mrjob_wordcount2.py INPUT_TEXT1.txt
+</pre>
+
+<script>
+const TEXT = `PRACTICAL NO.2
+Aim: Write a program to implement word count program using mapreduce.
+Code:
+pip install mrjob
+
+%%writefile mrjob_wordcount3.py
+from mrjob.job import MRJob
+import re
+WORD_REGEXP = re.compile(r"[a-zA-Z]+")
+class MRWordCount(MRJob):
+  def mapper(self,_,line):
+    for word in WORD_REGEXP.findall(line):
+      yield (word.lower(),1)
+  def reducer(self,word,counts):
+    yield (word,sum(counts))
+if __name__ == "__main__":
+  MRWordCount.run()
+
+
+%%writefile INPUT_TEXT1.txt
+Hello world
+Hello Google Colab 
+MapReduce word count example
+Hello MapReduce
+
+
+!python mrjob_wordcount2.py INPUT_TEXT1.txt`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

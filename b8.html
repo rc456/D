@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No.8
+Aim:- Implement clustering algorithm using map reduce.
+ 
+Code:-
+
+import numpy as np
+from collections import defaultdict
+ 
+# Generate Sample Dataset
+np.random.seed(42)
+data = np.vstack((
+    np.random.randn(100, 2) + [2, 2],
+    np.random.randn(100, 2) + [8, 8]))
+K = 2
+max_iters = 10
+epsilon = 0.001
+ 
+# Initialize Centroids
+centroids = data[np.random.choice(len(data), K, replace=False)]
+ 
+# Distance Function
+def euclidean_distance(a, b):
+    return np.linalg.norm(a - b)
+ 
+# MAP FUNCTION
+def mapper(data_chunk, centroids):
+    mapped = []
+    for point in data_chunk:
+        distances = [euclidean_distance(point, c) for c in centroids]
+        nearest_centroid = np.argmin(distances)
+        mapped.append((nearest_centroid, point))
+    return mapped
+ 
+# REDUCE FUNCTION
+def reducer(mapped_data):
+    cluster_dict = defaultdict(list)
+    # Shuffle + Sort (group by key)
+    for key, point in mapped_data:
+        cluster_dict[key].append(point)
+    new_centroids = []
+    for key in sorted(cluster_dict.keys()):
+        new_centroids.append(np.mean(cluster_dict[key], axis=0))
+    return np.array(new_centroids)
+ 
+# Iterative MapReduce KMeans
+for iteration in range(max_iters):
+    print(f"Iteration {iteration+1}")
+    # MAP
+    mapped = mapper(data, centroids)
+    # REDUCE
+    new_centroids = reducer(mapped)
+    # Check convergence
+    shift = np.linalg.norm(new_centroids - centroids)
+    print("Centroid shift:", shift)
+    if shift &lt; epsilon:
+        break
+    centroids = new_centroids
+print("\nFinal Centroids:")
+print(centroids)
+</pre>
+
+<script>
+const TEXT = `Practical No.8
+Aim:- Implement clustering algorithm using map reduce.
+ 
+Code:-
+
+import numpy as np
+from collections import defaultdict
+ 
+# Generate Sample Dataset
+np.random.seed(42)
+data = np.vstack((
+    np.random.randn(100, 2) + [2, 2],
+    np.random.randn(100, 2) + [8, 8]))
+K = 2
+max_iters = 10
+epsilon = 0.001
+ 
+# Initialize Centroids
+centroids = data[np.random.choice(len(data), K, replace=False)]
+ 
+# Distance Function
+def euclidean_distance(a, b):
+    return np.linalg.norm(a - b)
+ 
+# MAP FUNCTION
+def mapper(data_chunk, centroids):
+    mapped = []
+    for point in data_chunk:
+        distances = [euclidean_distance(point, c) for c in centroids]
+        nearest_centroid = np.argmin(distances)
+        mapped.append((nearest_centroid, point))
+    return mapped
+ 
+# REDUCE FUNCTION
+def reducer(mapped_data):
+    cluster_dict = defaultdict(list)
+    # Shuffle + Sort (group by key)
+    for key, point in mapped_data:
+        cluster_dict[key].append(point)
+    new_centroids = []
+    for key in sorted(cluster_dict.keys()):
+        new_centroids.append(np.mean(cluster_dict[key], axis=0))
+    return np.array(new_centroids)
+ 
+# Iterative MapReduce KMeans
+for iteration in range(max_iters):
+    print(f"Iteration {iteration+1}")
+    # MAP
+    mapped = mapper(data, centroids)
+    # REDUCE
+    new_centroids = reducer(mapped)
+    # Check convergence
+    shift = np.linalg.norm(new_centroids - centroids)
+    print("Centroid shift:", shift)
+    if shift < epsilon:
+        break
+    centroids = new_centroids
+print("\\nFinal Centroids:")
+print(centroids)`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

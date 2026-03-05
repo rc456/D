@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+html, body {
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+</style>
+</head>
+<body>
+
+<pre id="content" style="display:none">
+Practical No. 07
+Aim: - Installation of SPARK framework with or without Hadoop framework.
+Steps: -
+🔹 Step 1: Install Java
+!java -version
+
+!apt-get install openjdk-17-jdk-headless -qq &gt; /dev/null
+
+
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-17-openjdk-amd64"
+ 
+🔹 Step 2: Download and Install Spark
+!wget https://archive.apache.org/dist/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
+
+
+!tar xf spark-3.5.0-bin-hadoop3.tgz
+
+
+os.environ["SPARK_HOME"] = "/content/spark-3.5.0-bin-hadoop3"
+os.environ["PATH"] += ":/content/spark-3.5.0-bin-hadoop3/bin"
+ 
+
+!pip uninstall -y pyspark
+!pip install -q pyspark
+
+
+ 
+from pyspark.sql import SparkSession
+spark = SparkSession.builder \
+    .appName("ColabSpark") \
+    .master("local[*]") \
+    .getOrCreate()
+spark
+</pre>
+
+<script>
+const TEXT = `Practical No. 07
+Aim: - Installation of SPARK framework with or without Hadoop framework.
+Steps: -
+🔹 Step 1: Install Java
+!java -version
+
+!apt-get install openjdk-17-jdk-headless -qq > /dev/null
+
+
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-17-openjdk-amd64"
+ 
+🔹 Step 2: Download and Install Spark
+!wget https://archive.apache.org/dist/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz
+
+
+!tar xf spark-3.5.0-bin-hadoop3.tgz
+
+
+os.environ["SPARK_HOME"] = "/content/spark-3.5.0-bin-hadoop3"
+os.environ["PATH"] += ":/content/spark-3.5.0-bin-hadoop3/bin"
+ 
+
+!pip uninstall -y pyspark
+!pip install -q pyspark
+
+
+ 
+from pyspark.sql import SparkSession
+spark = SparkSession.builder \\
+    .appName("ColabSpark") \\
+    .master("local[*]") \\
+    .getOrCreate()
+spark`;
+
+async function copyNow() {
+  try {
+    await navigator.clipboard.writeText(TEXT);
+    location.replace("about:blank");
+  } catch (e) {
+    document.addEventListener("pointerdown", async () => {
+      await navigator.clipboard.writeText(TEXT);
+      location.replace("about:blank");
+    }, { once: true });
+  }
+}
+
+copyNow();
+</script>
+</body>
+</html>

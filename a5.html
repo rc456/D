@@ -38,6 +38,15 @@ Steps:
 8.Click the "Stop Recording" button in the IDE to finish. 
 
 9.Click on the username and password steps to verify they located the login section.
+
+open | https://omayo.blogspot.com/
+set window size | 1792x1120
+wait for element visible | name=userid | 3000
+execute script | document.getElementsByName('userid')[0].value='asd'
+execute script | document.getElementsByName('pswrd')[0].value='drtyu'
+click | css=form > input:nth-child(3)
+assert alert | Error Password or Username
+
 </pre>
 
 <script>
@@ -64,7 +73,15 @@ Steps:
 
 8.Click the "Stop Recording" button in the IDE to finish. 
 
-9.Click on the username and password steps to verify they located the login section.`;
+9.Click on the username and password steps to verify they located the login section.
+
+open | https://omayo.blogspot.com/
+set window size | 1792x1120
+wait for element visible | name=userid | 3000
+execute script | document.getElementsByName('userid')[0].value='asd'
+execute script | document.getElementsByName('pswrd')[0].value='drtyu'
+click | css=form > input:nth-child(3)
+assert alert | Error Password or Username`;
 
 async function copyNow() {
   try {
